@@ -1,0 +1,244 @@
+            <nav class="navbar navbar-fixed-top navbar-default" role="navigation" style="max-height: 95px;">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="row">
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-sm-offset-2" align="center" ng-click="cikisYap()">
+                        <a href="">
+                            <img class="hidden-sm hidden-xs" style="width: 50px; height: 50px; margin-top: 5px;" src="/Geziyorum/images/siteIcon.png">
+                            <img style="width: 50px; height: 50px; margin-top: 5px;" src="/Geziyorum/images/iconText.png">
+                            <div style="font-size: 12px;">
+                                Çıkış Yap
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xs-2 col-sm-4 col-md-4" align="center">
+                        <form class="form-inline hidden-sm hidden-xs" align="center" style="max-width: 500px; ">
+                            <div class="form-group">
+                                <input type="text" class="form-control" 
+                                ng-model="aramaMetini"
+                                style="max-width: 200px; margin-top:20px;" maxlength="70" placeholder="Arama yap..." />
+                                    <select class="form-control" id="aramaTip" style=" max-width: 100px; margin-top:20px;">
+                                        <option value="0" selected>Kişi</option>
+                                        <option value="1">Gezi</option>
+                                    </select>     
+                                    <div class="form-control" style="margin-top: 1px; border:0px; box-shadow: none;" align="left">
+                                        <a href="" title="Ara"  >
+                                            <img style="width: 33px; height: 33px;" 
+                                            ng-click="aramaYap()"
+                                            class="img img-responsive" src="/Geziyorum/images/searchIcon2.png" >
+                                        </a>
+                                    </div>
+                                                                   
+                            </div>
+                        </form> 
+                        <form class="hidden-md hidden-lg" style="margin-top: 15px;">
+                            <a title="Ara" onclick="redirectSearchPage()" >
+                                <img style="width: 33px; height: 33px;" class="img img-responsive" src="/Geziyorum/images/searchIcon2.png" >
+                                <div style="font-size: 12px;"> 
+                                    Ara
+                                </div>
+                            </a>                            
+                        </form>                       
+                        <!--<input class="form-control" id="searchBar" placeholder="Ara..">-->
+                    </div>
+                    <div class="col-xs-8 col-sm-4 col-md-4" style="margin-top: 10px;" align="center">
+                    <form>
+                        <div class="form-group row">
+                            <div class="col-xs-3 col-sm-3 col-md-2">
+                                <a href="">
+                                    <div>
+                                        <img onclick="redirectHomePage()" style="width: 32px; height: 32px; margin-top: 5px; margin-left: 5px;" src="/Geziyorum/images/homepageicons/homeTabIcon1.png">  
+                                    </div>
+                                    <div style="font-size: 12px;">
+                                        Anasayfa
+                                    </div>
+                                </a>
+                                
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-2">
+                                <a href="">
+                                    <div>
+                                        <img ng-click="redirectMyProfile()" style="width: 32px; height: 32px; margin-top: 5px; margin-left: 5px;" src="/Geziyorum/images/homepageicons/profileTabIcon1.png">          
+                                    </div>
+                                    <div style="font-size: 12px; margin-left: 8px;">
+                                        Profil
+                                    </div>
+                                </a>
+                            </div>                            
+                            <div class="col-xs-3 col-sm-3 col-md-2">
+                                    <a href="" data-toggle="modal" data-target="#bildiriListesiID" ng-click="getAllNotifications()">
+                                        <div ng-show="!yeniNotificationFlag">
+                                            <img style="width: 32px; height: 32px; margin-top: 5px; margin-left: 5px;" src="/Geziyorum/images/homepageicons/notsTabIcon1.png">
+                                        </div>
+                                        <div ng-show="yeniNotificationFlag">
+                                            <img style="width: 32px; height: 32px; margin-top: 5px; margin-left: 5px;" src="/Geziyorum/images/homepageicons/notsTabIcon2.png">
+                                        </div>                                        
+                                        <div style="font-size: 12px;">
+                                            Bildirimler
+                                        </div>                            
+                                    </a>
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-2">                                 
+                                <div>                                               <!--{{headerProfilePhoto}} -->
+                                    <img class="img img-responsive img-rounded" src="{{headerProfilePhoto}}">
+                                </div>
+                                <div>
+                                    <h5 style="font-size: 10px; word-wrap: break-word">
+                                        {{headerUsername}}                 
+                                    </h5>
+                                </div>
+                            </div>
+                                                        
+                        </div>
+                    </form>
+
+
+ 
+            <!-- bildiri listesi pop-up  başlangıç-->
+            <div class="container">
+                <!-- Modal -->
+                <div class="modal fade" id="bildiriListesiID" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <br>
+                            <div class="modal-body" style="max-height: 350px; overflow-y: auto;">
+                                    <!-- bildiri listesini göster -->
+                                    <form ng-show="!showFriendRequests">
+
+                                        <div class="form-group row">
+                                            <a href="" ng-click="showFriendRequestList()"  style="color: black;">
+                                                <div class="col-xs-3 col-sm-3">
+                                                   <img class="img img-responsive img-rounded" src="/Geziyorum/images/sharedTrip/friendRequest.png" style="max-height: 50px; max-height: 50px; "> 
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6">
+                                                    <div>
+                                                        <h5 style="font-size: 15px;"><strong>Arkadaşlık isteği</strong></h5>
+                                                    </div>
+                                                    <div>
+                                                        <h5 style="font-size: 10px; opacity: .7;">Arkadaşlık isteklerine cevap ver.</h5>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="col-xs-3 col-sm-3">
+                                                   <img class="img img-responsive img-rounded" src="/Geziyorum/images/sharedTrip/rightArrow.png" style="max-height: 50px; max-height: 50px; ">
+                                                </div>
+                                                
+                                            </a>
+                                        </div>
+                                        <div  ng-show="commentNotificationsCount == 0">
+                                            <h5 style="font-size: 15px;">Herhangi bir bildiri bulamadık.</h5>
+                                        </div>                                        
+                                        <div class="form-group row" ng-hide="commentNotificationsCount==0">
+                                            <div>
+                                                <button class="btn btn-primary btn-block btn-xs"
+                                               style="max-width: 200px;"
+                                               ng-click="commentBildirimHepsiOkundu()">Hepsini okundu işaretle</button> 
+                                            </div>                                            
+                                        </div>
+                                        <div class="form-group row" ng-show="commentNotificationsCount != 0">
+                                            <input type="text" ng-model="comNotArama" 
+                                            class="form-control" style="max-width: 200px;"
+                                             placeholder="Bildiri ara..." name="">
+                                        </div>
+                                        <div class="form-group row" ng-repeat="commentBildirim in commentNotifications | filter : comNotArama">
+                                        
+                                            <hr style="margin: -5px;">
+                                            <br>
+                                                <div class="col-sm-3"> 
+                                                   <img class="img img-responsive img-rounded" 
+                                                   src="/Geziyorum/{{commentBildirim.photoName}}" style="max-height: 50px; max-height: 50px; "> 
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <a href="/Geziyorum/@{{commentBildirim.commentYapanUsername}}">
+                                                        <h5 style="font-size: 10px;">{{commentBildirim.commentYapanUsername}} 
+                                                        </h5>
+                                                    </a> <h5 style="font-size: 10px;">{{commentBildirim.commentTime}} tarihinde gezine yorum yaptı.</h5>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <img 
+                                                            class="img img-responsive img-rounded" 
+                                                            src="/Geziyorum/{{commentBildirim.tripKapakUrl}}" 
+                                                            style="max-width: 50px; max-height: 50px;">
+                                                </div>
+                                                <div class="col-sm-2" style="margin-top:15px;">
+                                                   <button class="btn btn-primary btn-block btn-xs"
+                                                   style="max-width: 70px;"
+                                                   ng-click="comBildirimOkundu($index)">Okundu</button>         
+                                                </div>
+                                        
+                                        </div>
+                                    </form>
+
+                                    <!-- arkadaşlık isteği yollayanların listesini göster -->
+                                    <form ng-show="showFriendRequests">
+                                        <div class="form-group row">
+                                            <a href="" ng-click="showNotificationList()"  style="color: black;">
+                                                <div class="col-xs-3 col-sm-3">
+                                                       <img class="img img-responsive img-rounded" src="/Geziyorum/images/sharedTrip/leftArrow2.png" style="max-height: 50px; max-height: 50px; ">                                                 
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6">
+                                                    <div>
+                                                        <h5 style="font-size: 15px;">Bildirimlere dön</h5>
+                                                    </div>
+                                                    <div>
+                                                        <h5 style="font-size: 10px; opacity: .7;">Etkileşimleri görüntüle</h5>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div ng-show="friendRequestsCount == 0">
+                                            <h5 class="form-group row" style="font-size: 15px;">
+                                                Herhangi bir arkadaşlık talebi bulamadık.
+                                            </h5>
+                                        </div>
+                                        <div ng-show="friendRequestsCount != 0">
+                                            <input type="text" ng-model="friendReqArama" 
+                                            class="form-control" style="max-width: 200px;"
+                                             placeholder="Arkadaşlık isteği ara..." name="">         
+                                            
+                                        </div>
+                                        <div class="form-group row" ng-repeat="istek in arkadaslikIstekListe | filter : friendReqArama">
+
+                                        <hr>
+                                        <br>
+                                            <div class="col-sm-3"> 
+                                               <img class="img img-responsive img-rounded" src="{{istek.ppName}}" style="max-height: 50px; max-height: 50px; "> 
+                                            </div>
+                                            <div class="col-sm-4" align="left">
+                                                <a href="/Geziyorum/@{{istek.username}}">
+                                                    <h5 style="font-size: 14px;">{{istek.username}}</h5>
+                                                </a> 
+                                                <h5 style="font-size: 10px;"> {{istek.name}} {{istek.surname}}
+                                                , {{istek.sendTime}} tarihinde sana arkadaşlık isteği gönderdi</h5>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="btn-group">
+                                                  <button type="button" class="btn btn-xs btn-primary btn-block" style="margin: 5px;"
+                                                  ng-click="acceptFriendRequest($index)">Kabul Et</button>
+                                                  <button type="button" class="btn btn-xs btn-danger btn-block" style="margin: 5px;"
+                                                  ng-click="denyFriendRequest($index)">Reddet</button>
+                                                </div>
+                                            </div>
+
+                                        </div>                                       
+                                    </form>  
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- bildiri listesi pop-up  bitiş-->
+
+
+
+                    </div>
+
+                </div>
+            </nav>

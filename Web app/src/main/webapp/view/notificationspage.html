@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html ng-app="geziyorumAppModel" lang="tr-TR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="lib/css/lib/bootstrap-glyphicons.css">    
+    <link rel="stylesheet" type="text/css" href="lib/css/lib/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/custom/notificationspage.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/custom/commonCss.css">    
+    <script type="text/javascript" src="lib/js/lib/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/js/lib/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="lib/js/lib/angular-1.4.4.min.js"></script>
+    <script type="text/javascript" src="lib/js/lib/bootbox.min.js"></script>
+    <script type="text/javascript" src="lib/js/module/mainAngularModule.js"></script>      
+    <script type="text/javascript" src="lib/js/controllers/notificationspageCTRL.js"></script>
+    <script type="text/javascript" src="lib/js/common/commonFuncs.js"></script>   
+    <script type="text/javascript" src="lib/js/directives/js/loggedinHeaderDirective.js"></script>    
+
+    <title>Geziyorum ^_^ </title>
+</head>
+
+<body style="background-color: rgb(247,247,247);">
+    <div ng-controller="notificationspageCTRL">
+        <div class="container-fluid">  
+
+        <div my-header></div>
+            <br><br><br><br>
+
+            <div class="row">
+
+
+
+
+                <div class="col-sm-6 col-sm-offset-2">
+                    <div class="hr-sect">BİLDİRİMLER</div>    
+                    <ul class="nav nav-tabs nav-justified">
+                        <li ng-class="{active: activeTab === 1}">
+                            <a data-toggle="pill" href="#" ng-click="setActiveTab(1)">Genel</a>
+                        </li>
+                        <li ng-class="{active: activeTab === 2}">
+                            <a data-toggle="pill" href="#" ng-click="setActiveTab(2)">Senden bahsettiler</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" style="margin-top: 20px;">
+                        <div class="tab-pane" ng-class="{active: activeTab === 1}">
+                            <div class="panel">
+                                    <div class="panel-body">
+
+                                       <div class="panel panel-default" ng-repeat="gezi in geziler track by $index">
+                                            <div class="panel-body">
+                                                <div ng-show="showAllMentions">
+                                                    <div class="row">
+                                                        <div class="col-sm-2">
+                                                            <img src="images/sharedTrip/profilepicture.png" style="max-height: 15px; max-height: 15px; ">   
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <a href="">gezisinde</a>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            seni etiketledi                                         
+                                                        </div>  
+                                                        <div class="col-sm-4">
+                                                            | tarih: 16 kasım v.s
+                                                        </div>
+                                                        <div>
+                                                            bahsedilme ikonu
+                                                        </div>                                                                                              
+                                                    </div>
+                                                </div>
+                                                <div ng-show="!showAllMentions">
+                                                    <strong>Gösterilecek bir bildirim yok.</strong>
+                                                </div>  
+                                            </div>
+                                        </div>
+
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" style="margin-top: 20px;">
+                        <div class="tab-pane" ng-class="{active: activeTab === 2}">
+                            <div class="panel">
+                                    <div class="panel-body">
+
+                                                <div ng-show="showMentions">
+                                                    
+                                                </div>
+                                                <div ng-show="!showMentions">
+                                                    <strong>Gösterilecek bir bildirim yok.</strong>
+                                                </div>
+
+                                    </div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+
+                <div class="col-sm-2">
+                <br><br>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" align="center">Takipçi önerilerin</div>
+                            <div class="panel-body">
+                                   <div class="panel panel-default" ng-repeat="gezi in geziler track by $index">
+                                        <div class="panel-body">                            
+                                            <div class="row">
+                                                <div class="col-sm-2" align="right">
+                                                    <img src="images/sharedTrip/profilepicture.png" style="max-height: 15px; max-height: 15px; ">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div>
+                                                        <div align="center">
+                                                            Adı soyadı, @nickname
+                                                        </div>
+                                                        <div align="center" style="margin-top: 5px;">
+                                                            <button class="btn btn-primary btn-sm">Takip et</button>
+                                                        </div>
+                                                    </div>
+                                                </div>                                     
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                    </div>  
+                </div>                   
+            </div>
+
+ 
+          <div class="navbar navbar-light navbar-fixed-bottom">
+            <div class="container-fluid">
+            <div class="row">
+                <hr>
+                <div class="col-sm-4 col-sm-offset-2">
+                <div class="pull-left">
+                    <div class="col-sm-4">
+                      <a class="navbar-text" id="footerStyle">GİZLİLİK 
+                      </a>
+                        
+                    </div>
+                    <div class="col-sm-4">
+                      <a class="navbar-text" id="footerStyle">HAKKIMIZDA
+                      </a>        
+                    </div>
+                    <div class="col-sm-4">
+                      <a class="navbar-text" id="footerStyle" ng-click="redirectSupportPage()">DESTEK
+                      </a>        
+                    </div>
+                </div>
+                    
+                </div>
+                <div class="col-sm-4">
+                <div class="pull-right">            
+                      <p class="navbar-text" id="footerStyle" style="opacity: 0.8;">
+                      <strong>
+                      © 2017 Geziyorum
+                      </strong>
+                      </p>        
+                </div>    
+                </div>
+            </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

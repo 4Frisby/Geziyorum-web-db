@@ -1,0 +1,434 @@
+/*Contact sectiom*/
+
+
+#loading-bar {
+  pointer-events: all;
+  z-index: 99999;
+  border: none;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  cursor: wait;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+
+
+#div{
+  border: 1px solid black;
+}
+
+
+
+
+.hr-sect {
+    display: flex;
+    flex-basis: 100%;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.35);
+    margin: 8px 0px;
+}
+.hr-sect::before,
+.hr-sect::after {
+    content: "";
+    flex-grow: 1;
+    background: rgba(0, 0, 0, 0.35);
+    height: 1px;
+    font-size: 0px;
+    line-height: 0px;
+    margin: 0px 8px;
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for vh unit */
+  min-height: 100vh; /* You might also want to use
+                        'height' property instead.
+                        
+                        Note that for percentage values of
+                        'height' or 'min-height' properties,
+                        the 'height' of the parent element
+                        should be specified explicitly.
+  
+                        In this case the parent of '.vertical-center'
+                        is the <body> element */
+
+  /* Make it a flex container */
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; 
+  
+  /* Align the bootstrap's container vertically */
+    -webkit-box-align : center;
+  -webkit-align-items : center;
+       -moz-box-align : center;
+       -ms-flex-align : center;
+          align-items : center;
+  
+  /* In legacy web browsers such as Firefox 9
+     we need to specify the width of the flex container */
+  width: 100%;
+  
+  /* Also 'margin: 0 auto' doesn't have any effect on flex items in such web browsers
+     hence the bootstrap's container won't be aligned to the center anymore.
+  
+     Therefore, we should use the following declarations to get it centered again */
+         -webkit-box-pack : center;
+            -moz-box-pack : center;
+            -ms-flex-pack : center;
+  -webkit-justify-content : center;
+          justify-content : center;
+}
+
+.cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width:500px;
+    height:350px;
+}
+form .progress {
+    line-height: 15px;
+}
+.progress {
+    display: inline-block;
+    width: 100px;
+    border: 3px groove #CCC;
+}
+.progress div {
+    font-size: smaller;
+    background: orange;
+    width: 0;
+  }
+
+
+
+
+/*  vertical tab */
+/*https://bootsnipp.com/snippets/5M9va*/
+
+
+
+/* ROBOTO FONT FACES - I */
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v16/ek4gzZ-GeXAPcSbHtCeQI_esZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v16/mErvLBYg_cXG3rLvUsKT_fesZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v16/-2n2p-_Y08sg57CNWQfKNvesZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v16/u0TOpm082MNkS5K0Q4rhqvesZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
+  unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v16/NdF9MtnOpLzo-noMoG0miPesZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v16/Fcx7Wwv8OzT71A3E1XOAjvesZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v16/CWB0XYA8bzo0kSThX0UTuA.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+/* ROBOTO FONT FACES - F */
+
+/** General HTML style - I */
+/*@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900);*/
+
+
+
+/** Rounded divs - I */
+div.rounded,
+div.top-rounded,
+div.bottom-rounded {
+    border: solid 1px #dce1e5;
+}
+
+div.rounded {
+    margin-bottom: 30px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+       -moz-border-radius:  4px 4px 4px 4px;
+            border-radius: 4px 4px 4px 4px;
+}
+
+div.top-rounded {
+    -webkit-border-radius: 4px 4px 0px 0px;
+       -moz-border-radius: 4px 4px 0px 0px;
+            border-radius: 4px 4px 0px 0px;
+}
+
+div.bottom-rounded {
+    border-top-style: none;
+    -webkit-border-radius: 0px 0px 4px 4px;
+       -moz-border-radius: 0px 0px 4px 4px;
+            border-radius: 0px 0px 4px 4px;
+}
+/** Rounded divs - F */
+
+
+/** Dropdown draft - I */
+.dropdown span.caret {
+    float:right;
+    margin-top:8px;
+}
+
+.dropdown button {
+    text-align: left;
+}
+
+.dropdown-menu {
+    width: 100%;
+}
+/** Dropdown draft - F */
+
+/** Let tabls-left class be available in bootstrap 3.3.7 - I **/
+.tabs-left > .nav-tabs {
+  border-bottom: 0;
+}
+
+.tab-content > .tab-pane {
+  display: none;
+}
+
+.tab-content > .active {
+  display: block;
+}
+
+.tabs-left > .nav-tabs > li {
+  float: none;
+}
+
+.tabs-left > .nav-tabs > li > a,
+.tabs-left > .nav-tabs > li > div {
+  margin-right: 0;
+  margin-bottom: 3px;
+}
+
+.tabs-left > .nav-tabs {
+  float: left;
+  margin-right: 19px;
+  border-right: 1px solid #ddd;
+}
+
+.tabs-left > .nav-tabs > li > a,
+.tabs-left > .nav-tabs > li > div {
+  margin-right: -1px;
+  -webkit-border-radius: 4px 0 0 4px;
+     -moz-border-radius: 4px 0 0 4px;
+          border-radius: 4px 0 0 4px;
+}
+
+.tabs-left > .nav-tabs > li > a:hover,
+.tabs-left > .nav-tabs > li > a:focus,
+.tabs-left > .nav-tabs > li > div:hover,
+.tabs-left > .nav-tabs > li > div:focus{
+  border-color: #eeeeee #dddddd #eeeeee #eeeeee;
+  background-color: #eeeeee;
+}
+
+.tabs-left > .nav-tabs .active > a,
+.tabs-left > .nav-tabs .active > a:hover,
+.tabs-left > .nav-tabs .active > a:focus,
+.tabs-left > .nav-tabs .active > div,
+.tabs-left > .nav-tabs .active > div:hover,
+.tabs-left > .nav-tabs .active > div:focus{
+  border-color: #ddd transparent #ddd #ddd;
+  *border-right-color: #ffffff;
+}
+/** Let tabls-left class be available in bootstrap 3.3.7 - F **/
+
+.account-type
+{
+    font-family: 'Roboto', sans-serif;
+    color: #A0AEB6;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 18px;
+}
+
+.account-amount
+{
+    font-family: 'Roboto', sans-serif;
+  color: #A0AEB6;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+/* TABS */
+.tabs-left > .nav-tabs{
+    margin-right:0px;
+    padding: 0;
+    height: 700px; /* Debe ser el mismo height que el que tenga .tab-content */
+}
+
+/* CONTENIDO DE LOS TABS */
+.tab-content {
+    background-color: #FFFFFF;
+    border:solid 1px #DCE1E5;
+    border-left-style: none;
+    height: 700px; /* Debe ser el mismo height que el que tenga .tabs-left > .nav-tabs */
+    padding-left: 50px;
+    
+    border-radius: 0px 4px 4px 4px;
+    -moz-border-radius: 0px 4px 4px 4px;
+    -webkit-border-radius: 0px 4px 4px 4px;
+    
+    -webkit-box-shadow: 0px 0px 18px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: 0px 0px 18px 2px rgba(0,0,0,0.05);
+    box-shadow: 0px 0px 18px 2px rgba(0,0,0,0.05);
+}
+
+.long-content{
+   height: 760px /*Kişisel bilgiler kısmı için */
+}
+
+.short-content{
+   height: 425px /*Şifre kısmı için */  
+}
+
+.tab-content > div {
+    margin-top: 26px;
+}
+
+/* Formato del tab activo */
+.tabs-left > .nav-tabs .active > a, 
+.tabs-left > .nav-tabs .active > a:hover, 
+.tabs-left > .nav-tabs .active > a:focus,
+
+.tabs-left > .nav-tabs .active div, 
+.tabs-left > .nav-tabs .active div:hover, 
+.tabs-left > .nav-tabs .active div:focus
+{
+    background-color: #FFFFFF;
+    
+    border-bottom-style: none;
+    border-left-style: none;
+    
+    /*border-bottom: 1px solid #DCE1E5;*/
+    /*border-left: 1px solid #DCE1E5;*/
+    border-bottom-left-radius: 0px;
+    border-right-style: none;
+    
+    margin-right: -1px;
+    
+    -webkit-box-shadow: -4px 0px 18px -1px rgba(0,0,0,0.05);
+    -moz-box-shadow: -4px 0px 18px -1px rgba(0,0,0,0.05);
+    box-shadow: -4px 0px 18px -1px rgba(0,0,0,0.05);
+}
+
+/* Formato de los tabs en general */
+.tabs-left > .nav-tabs > li:nth-child(1) > a,
+.tabs-left > .nav-tabs > li:nth-child(1) > a:hover,
+.tabs-left > .nav-tabs > li:nth-child(1) > a:focus,
+
+.tabs-left > .nav-tabs > li:nth-child(1) > div,
+.tabs-left > .nav-tabs > li:nth-child(1) > div:hover,
+.tabs-left > .nav-tabs > li:nth-child(1) > div:focus 
+{
+    cursor: pointer;
+    border-top-left-radius: 4px;
+}
+
+.tabs-left > .nav-tabs > li.active:nth-child(1) > a,
+.tabs-left > .nav-tabs > li.active:nth-child(1) > a:hover,
+.tabs-left > .nav-tabs > li.active:nth-child(1) > a:focus,
+
+.tabs-left > .nav-tabs > li.active:nth-child(1) > div,
+.tabs-left > .nav-tabs > li.active:nth-child(1) > div:hover,
+.tabs-left > .nav-tabs > li.active:nth-child(1) > div:focus 
+{
+    border-top-left-radius: 4px;
+    border-bottom-style: none;
+    border-left: 1px solid #DCE1E5;
+}
+
+.tabs-left > .nav-tabs > li > a, 
+.tabs-left > .nav-tabs > li > div {
+    display: table;
+    /*border: solid 1px transparent;*/
+    margin-right: -1px;
+    
+    margin-bottom: 0;
+    padding-bottom: 0;
+    
+    height: 105px;
+    
+    border:solid 1px #DCE1E5;
+    border-radius: 0px;
+}
+
+/* Style of the div element acting as tab content */
+.tabbable.tabs-left > .nav-tabs > li > div > div {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0px 12px 0px 12px;
+    
+    min-width: 105px;
+    max-width: 105px;
+    
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+
+/* vertical t ab*/
+
+.greyText{
+  color : grey;
+}
+
+.blackHr{
+  border-color: black; background-color: black; color: black;
+}
+
+.merkez{
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+}
+
+.merkezCollapse{
+  text-align: center;
+}

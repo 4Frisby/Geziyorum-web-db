@@ -1,0 +1,18 @@
+insert into type values(4,"Herkes");
+insert into type values(5,"Sadece Arkadaşlar");
+insert into type values(6,"Sadece Ben");
+insert into type values(20,"Yürüyüş");
+insert into type values(21,"Tempolu Yürüyüş");
+insert into type values(22,"Bisiklet");
+insert into type values(23,"Araba");
+insert into type values(51,"Taciz Barındırıyor");
+insert into type values(52,"Uygunsuz İçerik");
+insert into type values(53,"Hakaret Barındırıyor");
+
+
+insert into admin(username,password) values("admin","1");
+
+INSERT INTO `users` (`name`,`surname`,`email`,`password`,`created_at`,`username`,`personal_info`,`website`,`location_country_id`,`location_city_id`,`is_verified`,`phone`,`hide`) VALUES ('dummy','dummy','dummy','dummy','2017-12-31 01:48:23','dummy',NULL,NULL,NULL,NULL,0,NULL,0);
+
+INSERT INTO `sessions` (`user_id`,`lastly_active_time`,`created_time`,`token`) VALUES ((select id from users where username = 'dummy'),'2018-01-01 01:29:05','2018-01-01 01:29:05','dummydummy');
+

@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html ng-app="geziyorumAppModel" lang="tr-TR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ 
+    <script type="text/javascript" src="lib/js/lib/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="lib/js/lib/angular-1.4.4.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/js/lib/bootstrap-progressbar.min.js"></script>      
+    <script type="text/javascript" src="lib/js/controllers/adminpanelCTRL.js"></script>
+    <script type="text/javascript" src="lib/js/common/commonFuncs.js"></script>  
+    <script type="text/javascript" src="lib/js/directives/js/loggedinHeaderDirective.js"></script>
+    <script type="text/javascript" src="lib/js/lib/bootbox.min.js"></script>
+    <script type="text/javascript" src="lib/js/lib/bootstrap-progressbar.min.js"></script>     
+    <script src="https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/scripts/ng-map.js"></script>  
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyAwKYugws4WAdSIoMLbZhnnrJA44ON0qZA&libraries=placeses,visualization,drawing,geometry,places"></script>
+    <script type="text/javascript" src="lib/js/lib/loading-bar.js"></script>         
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/custom/adminpanel.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/custom/commonCss.css">    
+    <link rel="stylesheet" type="text/css" href="lib/css/lib/loading-bar.css">      
+
+    
+
+    <style type="text/css">
+
+    #div{
+        border: 1px solid black;
+    }
+    </style>
+</head>
+
+<body ng-controller="adminpanelCTRL" style="background-color: rgb(247,247,247);"> 
+
+
+                <nav class="navbar navbar-inverse" style="height: 90px; border: 0px; background-color : rgb(255,255,255)">
+                  <div class="container-fluid" id="headerBackground" >
+                    <div class="navbar-header">
+                        <div class="row">
+                            <a class="navbar-brand" >
+                                <div>
+                                </div>
+                                <div>
+                                    <img style="width: 100px; height: 50px;" src="images/siteIcon2.png">
+                                </div>
+                                <div style="margin-top: -5px;">
+                                   <h5 style="opacity: 0.5; font-size: 12px;">Yönetici Paneli</h5> 
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <ul class="nav navbar-nav" style="float:right; margin-top: 10px;"> 
+                        <li>
+                            <div align="center">
+                                <h5 style="font-size: 15px; border:0.5px solid white; opacity: 0.7; color: grey;">
+                                    Merhaba yönetici, {{admin.username}}
+                                </h5>
+                            </div>
+                            <div align="center">
+                                <a href=""
+                                 ng-click="cikisYap()"
+                                 style="border:0.5px solid white; opacity: 0.7; color: grey;"><span class="glyphicon glyphicon-user"></span>Çıkış Yap.</a>
+                            </div>
+                        </li>
+                    </ul>                    
+                  </div>
+                </nav> 
+
+<div class="container-fluid">
+    <ul class="nav nav-tabs nav-justified">
+        <li ng-class="{active: activeTab === 1}">
+            <a data-toggle="pill" href="#" ng-click="setActiveTab(1)">Yorum Şikayetleri</a>
+        </li>
+        <li ng-class="{active: activeTab === 2}">
+            <a data-toggle="pill" href="#" ng-click="setActiveTab(2)">Gönderi İçerik Şikayetleri</a>
+        </li>
+        <li ng-class="{active: activeTab === 3}">
+            <a data-toggle="pill" href="#" ng-click="setActiveTab(3)">Profil Şikayetleri</a>
+        </li> 
+        <!--
+        <li ng-class="{active: activeTab === 4}">
+            <a data-toggle="pill" href="#" ng-click="setActiveTab(4)">Kaynak Görüntüleme</a>
+        </li> 
+        -->  
+        <li ng-class="{active: activeTab === 5}">
+            <a data-toggle="pill" href="#" ng-click="setActiveTab(5)">Destek Mesajları</a>
+        </li>                             
+    </ul>   
+</div>
+
+
+
+<!-- Yorum Şikayet Listesi Tablosuz Başlangıç -->
+
+<div class="tab-content" style="margin-top: 20px;">
+    <div class="tab-pane" ng-class="{active: activeTab === 1}">
+        <div class="panel panel-info ">
+            <div class="panel-heading" >
+                <div align="center">                
+                    <b style="font-size: 15px;" class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Yorum Şikayet</a>
+                    </b>
+
+                    <button type="submit" class="btn btn-primary pull-right" 
+                    style="margin-top: -8px;" 
+                    ng-show="true" data-toggle="collapse" data-target="#collapseOne">
+                                X
+                    </button>
+                </div>
+            </div>
+
+            <div id="collapseOne" class="panel-collapse collapse in" >
+                <div class="container col-xs-12" >
+                    <div class="row" >
+                        <div class="panel panel-default" >
+                            <div class="panel-heading">
+
+                                    <div class="row" align="center" style="margin: 10px;">
+                                        <form class="form-inline" role="form">
+                                            <div class="form-group has-success has-feedback">
+                                                <label class="control-label"></label>
+                                                <img src="images/searchIcon.png">
+                                                <input ng-model="yorumSikayetAranacakKelime" id="search" class="form-control" placeholder="İçerik Ara..." 
+                                                style="max-width: 250px; border:1px solid grey; margin-right: 30px; ">
+                                            </div>
+                                        </form>  
+                                    </div>                                                   
+                              
+                                    <!-- filtre dropdown başlangıç-->
+             
+                                    <div class="row" align="center" style="margin: 10px; ">
+                                        <div class="btn-group">
+                                            <button style="width: 280px;" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                Arama Sütunu Seç <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <div class="checkbox" align="left" style="margin : 10px;">
+                                                    <label><input type="checkbox" ng-model="yIdCheck" ng-change="yorumSikayetSutunFiltresi()">ID</label>
+                                                </div>
+                                                <div class="checkbox" align="left" style="margin : 10px;">
+                                                    <label><input type="checkbox" ng-model="ySikayetEdilenYorumIdCheck" ng-change="yorumSikayetSutunFiltresi()">Şikayet Edilen Yorum ID</label>
+                                                </div>
+                                                <div class="checkbox" align="left" style="margin : 10px;">
+                                                    <label><input type="checkbox" ng-model="ySikayetciUserCheck" ng-change="yorumSikayetSutunFiltresi()">Şikayet Eden Username</label>
+                                                </div>
+                                                <div class="checkbox" align="left" style="margin : 10px;">
+                                                    <label><input type="checkbox" ng-model="ySikayetEdilenUserCheck" ng-change="yorumSikayetSutunFiltresi()">Şikayet Edilen Username</label>
+                                                </div>                                                
+                                                <div class="checkbox" align="left" style="margin : 10px;">
+                                                    <label><input type="checkbox" ng-model="yYorumIcerikCheck" ng-change="yorumSikayetSutunFiltresi()">Şikayet Edilen Yorum İçeriği</label>
+                                                </div>
+                                                <div class="checkbox" align="left" style="margin : 10px;">
+                                                    <label><input type="checkbox" ng-model="ySikayetNedeniCheckk" ng-change="yorumSikayetSutunFiltresi()">Şikayet Nedeni</label>
+                                                </div>
+                                                <div class="checkbox" align="left" style="margin : 10px;">
+                                                    <label><input type="checkbox" ng-model="ySikayetMetiniCheck" ng-change="yorumSikayetSutunFiltresi()">Şikayet Metini</label>
+                                                </div>
+                                                <div class="checkbox" align="left" style="margin : 10px;">
+                                                    <label><input type="checkbox" ng-model="ySikayetZamaniCheck" ng-change="yorumSikayetSutunFiltresi()">Şikayet Zamanı</label>
+                                                </div>
+                                                <div class="checkbox" align="left" style="margin : 10px;">
+                                                    <label><input type="checkbox" ng-model="ydegerlendirildi" ng-change="yorumSikayetSutunFiltresi()">Şikayet değerlendirilme</label>
+                                                </div>                                                                                                
+                                                <div class="dropdown-divider"></div>
+                                                <div class="dropdown-item" align="center" style="margin : 10px;">
+                                                    <div class="col-xs-6" align="right">
+                                                    <button ng-click="yorumFiltreHepsiTrue()" class="btn btn-primary"> Hepsini Seç </button>
+                                                        
+                                                    </div>
+                                                    <div class="col-xs-6" align="left">
+                                                        
+                                                    <button ng-click="yorumFiltreHepsiFalse()" class="btn btn-danger dropdown-item"> Sıfırla </button>
+                                                    </div>
+                                                </div>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- filtre dropdown bitiş-->
+                         
+                      
+                            </div>
+
+                            <div class="col-xs-12" >
+                                
+                        
+                            <table class="table talbe-responsive table-striped table-bordered table-fixed cf" >
+                                <thead>
+                                    <tr>
+                                        <th class="col-xs-1"><b>ID</b></th>
+                                        <th class="col-xs-1"><b>Yorum ID</b> </th>
+                                        <th class="col-xs-1"><b>Şikayetci</b></th>
+                                        <th class="col-xs-1"><b>Şikayet Edilen</b> </th>
+                                        <th class="col-xs-2"><b>Yorum İçeriği</b> </th>
+                                        <th class="col-xs-1"><b>Şikayet Nedeni</b></th>
+                                        <th class="col-xs-2"><b>Şikayet Metini</b></th>
+                                        <th class="col-xs-1"><b>Şikayet Zamanı</b></th>
+                                        <th class="col-xs-1"><b>Değerlendirilme</b></th>
+                                        <th class="col-xs-1"><b></b></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{veri}}
+                                    <tr ng-repeat="veri in pageListYorum">
+                                        <td class="col-xs-1">
+                                        <div>
+                                            {{veri.sikayetId}}
+                                        </div></td>
+                                        <td class="col-xs-1">
+                                        <div style="overflow:auto">
+                                            {{veri.sikayetEdilenYorumId}}
+                                        </div></td>
+                                        <td class="col-xs-1">
+                                        <div style="overflow:auto">
+<div ng-show="veri.degerlendirildi == 'AÇIK'"> 
+   <a href=""
+   
+  data-toggle="modal" data-target="#profilGoruntule"
+   ng-click="kullaniciAra(veri.sikayetciUsername)">
+      {{veri.sikayetciUsername}}
+  </a>   
+</div>
+<div ng-show="veri.degerlendirildi == 'KAPALI'">
+  {{veri.sikayetciUsername}}
+</div>                                              
+                                        </div></td>
+                                        <td class="col-xs-1">
+                                        <div style="overflow:auto">
+<div ng-show="veri.degerlendirildi == 'AÇIK'"> 
+   <a href=""
+   
+  data-toggle="modal" data-target="#profilGoruntule"
+   ng-click="kullaniciAra(veri.sikayetEdilenUsername)">
+      {{veri.sikayetEdilenUsername}}
+  </a>   
+</div>
+<div ng-show="veri.degerlendirildi == 'KAPALI'">
+  {{veri.sikayetEdilenUsername}}
+</div>                                                                                         
+                                        </div></td>
+                                        <td class="col-xs-2">
+                                        <div style="overflow:auto">
+                                            {{veri.yorumIcerik}}
+                                        </div></td>
+                                        <td class="col-xs-1">
+                                        <div style="overflow:auto">
+                                            {{veri.sikayetNedeni}}
+                                        </div></td>
+                                        <td class="col-xs-2" style="max-width: 100px;">
+                                        <div style="overflow:auto;">
+                                            {{veri.sikayetMetini}}
+                                        </div></td>
+                                        <td class="col-xs-1">
+                                        <div style="overflow:auto">
+                                            {{veri.sikayetZamani}}
+                                        </div></td>
+                                        <td class="col-xs-1">
+                                        <div style="overflow:auto">
+                                            {{veri.degerlendirildi}}
+                                        </div></td>
+                                        <td class="col-xs-1" align="center" ng-hide="veri.degerlendirildi == 'KAPALI'">
+                                            <button class="btn btn-primary" ng-click="yorumSec($index)" data-toggle="modal" data-target="#yorumDegerlendir">
+                                                Değerlendir
+                                            </button>
+                                        </td>
+                                        <td class="col-xs-1" align="center" ng-hide="veri.degerlendirildi == 'AÇIK'">
+                                            <button class="btn btn-primary" ng-click="degerlendirmeDetay(veri)"
+                                             data-toggle="modal" 
+                                            data-target="#degerlendirilmeDetayGoruntule">
+                                                 Detayları Görüntüle
+                                            </button>
+                                        </td>                                        
+                                    </tr>
+                                </tbody>
+                                <tfoot >
+                                    <tr>
+                                        <td colspan="19" style="text-align: left;" >
+                                            <div align="center">
+                                            <paging datasource="yorumSikayetTabloVerisi" page-data="pageListYorum" page-size="10" filtre="yorumSikayetAranacakKelime" 
+                                            filter-variables="globalYorumSikayetFilter"></paging>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                             </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Yorum Şikayet Listesi Tablosuz Bitiş -->
+
+
+
+<!-- Gönderi Şikayet Listesi Tablosuz Başlangıç -->
+<div class="tab-content" style="margin-top: 20px;">
+    <div class="tab-pane" ng-class="{active: activeTab === 2}">
+        <div class="panel panel-info ">
+            <div class="panel-heading" >
+                <div align="center">                
+                    <b style="font-size: 15px;" class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Gönderi Şikayet</a>
+                    </b>
+
+                    <button type="submit" class="btn btn-primary pull-right" 
+                    style="margin-top: -8px;" 
+                    ng-show="true" data-toggle="collapse" data-target="#collapseTwo">
+                                X
+                    </button>
+                </div>
+            </div>
+
+            <div id="collapseTwo" class="panel-collapse collapse in" >
+                <div class="container col-xs-12" >
+                    <div class="row" >
+                        <div class="panel panel-default" >
+                            <div class="panel-heading">
+                         
+
+                                    <div class="row"  align="center" style="margin: 10px;">
+                                            <form class="form-inline" role="form">
+                                                <div class="form-group has-success has-feedback">
+                                                    <label class="control-label"></label>
+                                                    <img src="images/searchIcon.png">
+                                                    <input ng-model="gonderiSikayetAranacakKelime" id="search" class="form-control" placeholder="İçerik Ara..." 
+                                                    style="max-width: 250px; border:1px solid grey; margin-right: 30px; ">
+                                                </div>
+                                            </form>             
+                                    </div>
+                                    <!-- filtre dropdown başlangıç-->
+                                    <div class="row"  align="center" style="margin: 10px;">
+                                        <div class="btn-group">
+                                            <button style="width: 280px;" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                Arama Sütunu Seç <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <div class="checkbox" align="left" style="margin : 10px;">
+                                                    <label><input type="checkbox" ng-model="gIdCheck" ng-change="gonderiSikayetSutunFiltresi()">ID</label>
+                                                </div>
+                                                <div class="checkbox" align="left" style="margin : 10px;">
+                                                    <label><input type="checkbox" ng-model="gSikayetEdilenGonderiIdCheck" ng-change="gonderiSikayetSutunFiltresi()">Şikayet Edilen Gönderi ID</label>
+                                                </div>
+                                                <div class="checkbox" align="left" style="margin : 10px;">
+                                                    <label><input type="checkbox" ng-model="gSikayetciUserCheck" ng-change="gonderiSikayetSutunFiltresi()">Şikayet Eden Username</label>
+                                                </div>
+                                                <div class="checkbox" align="left" style="margin : 10px;">
+                                                    <label><input type="checkbox" ng-model="gSikayetEdilenUserCheck" ng-change="gonderiSikayetSutunFiltresi()">Şikayet Edilen Username</label>
+                                                </div>
+                                                <div class="checkbox" align="left" style="margin : 10px;">
+                                                    <label><input type="checkbox" ng-model="gSikayetNedeniCheck" ng-change="gonderiSikayetSutunFiltresi()">Şikayet Nedeni</label>
+                                                </div>
+                                                <div class="checkbox" align="left" style="margin : 10px;">
+                                                    <label><input type="checkbox" ng-model="gSikayetMetiniCheck" ng-change="gonderiSikayetSutunFiltresi()">Şikayet Metini</label>
+                                                </div>
+                                                <div class="checkbox" align="left" style="margin : 10px;">
+                                                    <label><input type="checkbox" ng-model="gSikayetZamaniCheck" ng-change="gonderiSikayetSutunFiltresi()">Şikayet Zamanı</label>
+                                                </div>
+                                                <div class="checkbox" align="left" style="margin : 10px;">
+                                                    <label><input type="checkbox" ng-model="gSikayetdegerlendirildiCheck" ng-change="gonderiSikayetSutunFiltresi()">degerlendirildi</label>
+                                                </div>                                                                                                
+                                                <div class="dropdown-divider"></div>
+                                                <div class="dropdown-item" align="center">
+                                                    <div class="col-xs-6" align="right">
+                                                    <button ng-click="gonderiFiltreHepsiTrue()" class="btn btn-primary"> Hepsini Seç </button>
+                                                        
+                                                    </div>
+                                                    <div class="col-xs-6" align="left">
+                                                        
+                                                    <button ng-click="gonderiFiltreHepsiFalse()" class="btn btn-danger dropdown-item"> Sıfırla </button>
+                                                    </div>
+                                                </div>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- filtre dropdown bitiş-->
+                     
+                        </div>
+
+                            <div class="col-xs-12" >
+                                
+                           
+                            <table class="table talbe-responsive table-striped table-bordered table-fixed cf" >
+                                <thead>
+                                    <tr>
+                                        <th class="col-xs-1"><b>ID</b></th>
+                                        <th class="col-xs-1"><b>Gönderi ID</b> </th>
+                                        <th class="col-xs-1"><b>Şikayetci</b></th>
+                                        <th class="col-xs-2"><b>Şikayet Edilen</b> </th>                    
+                                        <th class="col-xs-2"><b>Şikayet Nedeni</b></th>
+                                        <th class="col-xs-2"><b>Şikayet Metini</b></th>
+                                        <th class="col-xs-1"><b>Şikayet Zamanı</b></th>
+                                        <th class="col-xs-1"><b>Değerlendirilme</b></th>
+                                        <th class="col-xs-1"><b></b></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="veri in pageListGonderi">
+                                        <td class="col-xs-1">
+                                        <div>
+                                            {{veri.id}}
+                                        </div></td>
+                                        <td class="col-xs-1">
+                                        <div style="overflow:auto">
+                                            <div ng-show="veri.degerlendirildi == 'KAPALI'">
+                                                {{veri.sikayetEdilenGonderiId}}
+                                            </div>
+                                            <div ng-show="veri.degerlendirildi == 'AÇIK'">
+                                                <a 
+                                                data-toggle="modal" data-target="#paylasimDetay"
+                                                href="" ng-click="showPaylasimDetayPane(veri.sikayetEdilenGonderiId)">
+                                                    {{veri.sikayetEdilenGonderiId}}
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                        </td>
+                                        <td class="col-xs-1">
+                                        <div style="overflow:auto">
+<div ng-show="veri.degerlendirildi == 'AÇIK'"> 
+   <a href=""
+   
+  data-toggle="modal" data-target="#profilGoruntule"
+   ng-click="kullaniciAra(veri.sikayetciUsername)">
+      {{veri.sikayetciUsername}}
+  </a>   
+</div>
+<div ng-show="veri.degerlendirildi == 'KAPALI'">
+  {{veri.sikayetciUsername}}
+</div>   
+                                        </div></td>
+                                        <td class="col-xs-2">
+                                        <div style="overflow:auto">
+<div ng-show="veri.degerlendirildi == 'AÇIK'"> 
+   <a href=""
+   
+  data-toggle="modal" data-target="#profilGoruntule"
+   ng-click="kullaniciAra(veri.sikayetEdilenUsername)">
+      {{veri.sikayetEdilenUsername}}
+  </a>   
+</div>
+<div ng-show="veri.degerlendirildi == 'KAPALI'">
+  {{veri.sikayetEdilenUsername}}
+</div>                                                                                          
+                                        </div></td>
+                                        <td class="col-xs-2">
+                                        <div style="overflow:auto">
+                                            {{veri.sikayetNedeni}}
+                                        </div></td>
+                                        <td class="col-xs-2">
+                                        <div style="overflow:auto; max-width: 100px;">
+                                            {{veri.sikayetMetini}}
+                                        </div></td>
+                                        <td class="col-xs-1">
+                                        <div style="overflow:auto">
+                                            {{veri.sikayetZamani}}
+                                        </div></td>
+                                        <td class="col-xs-1">
+                                        <div style="overflow:auto">
+                                            {{veri.degerlendirildi}}
+                                        </div></td>
+                                        <td class="col-xs-1" align="center" ng-hide="veri.degerlendirildi == 'KAPALI'">
+                                            <button class="btn btn-primary" 
+                                            style="max-width: 200px; max-height: 40px; margin-top: 15px;"
+                                            ng-click="gonderiSec($index)" data-toggle="modal" data-target="#gonderiDegerlendir">
+                                                 Değerlendir
+                                            </button>
+                                        </td>
+                                        <td class="col-xs-1" align="center" ng-hide="veri.degerlendirildi == 'AÇIK'">
+                                            <button class="btn btn-primary" ng-click="degerlendirmeDetay(veri)"
+                                             data-toggle="modal" 
+                                            data-target="#degerlendirilmeDetayGoruntule">
+                                                 Detayları Görüntüle
+                                            </button>
+                                        </td>                                        
+                                    </tr>
+                                </tbody>
+                                <tfoot >
+                                    <tr>
+                                        <td colspan="19" style="text-align: left;" >
+                                            <div align="center">
+                                            <paging datasource="gonderiSikayetTabloVerisi" page-data="pageListGonderi" page-size="10" filtre="gonderiSikayetAranacakKelime" 
+                                            filter-variables="globalGonderiSikayetFilter"></paging>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                             </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Gönderi Şikayet Listesi Tablosuz Bitiş -->
+
+
+
+<!-- Profil Şikayet Başlangıç -->
+<div class="tab-content" style="margin-top: 20px;">
+    <div class="tab-pane" ng-class="{active: activeTab === 3}">
+        <div class="panel panel-info ">
+            <div class="panel-heading" >
+                <div align="center">                
+                    <b style="font-size: 15px;" class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Profil Şikayet</a>
+                    </b>
+
+                    <button type="submit" class="btn btn-primary pull-right" 
+                    style="margin-top: -8px;" 
+                    ng-show="true" data-toggle="collapse" data-target="#collapseThree">
+                                X
+                    </button>
+                </div>
+            </div>
+            </div>
+
+            <div id="collapseThree" class="panel-collapse collapse in" >
+                <div class="container col-xs-12" >
+                    <div class="row" >
+                        <div class="panel panel-default" >
+                            <div class="panel-heading">
+                          
+
+                                    <div class="row" align="center" style="margin: 10px;">
+                                            <form class="form-inline" role="form">
+                                                <div class="form-group has-success has-feedback">
+                                                    <label class="control-label"></label>
+                                                    <img src="images/searchIcon.png">
+                                                    <input ng-model="profilSikayetAranacakKelime" id="search" class="form-control" placeholder="İçerik Ara..." 
+                                                    style="max-width: 250px; border:1px solid grey; margin-right: 30px; ">
+                                                </div>
+                                            </form>             
+                                    </div>
+                                    <!-- filtre dropdown başlangıç-->
+                                    <div class="row" align="center" style="margin: 10px;">
+
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default dropdown-toggle" 
+                                            style="width: 280px;" data-toggle="dropdown">
+                                                Arama Sütunu Seç <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <div class="checkbox" align="left" style="margin:10px;">
+                                                    <label><input type="checkbox" ng-model="pIdCheck" ng-change="profilSikayetSutunFiltresi()">ID</label>
+                                                </div>
+                                                <div class="checkbox" align="left" style="margin:10px;">
+                                                    <label><input type="checkbox" ng-model="pSikayetciUserCheck" ng-change="profilSikayetSutunFiltresi()">Şikayet Eden Username</label>
+                                                </div>
+                                                <div class="checkbox" align="left" style="margin:10px;">
+                                                    <label><input type="checkbox" ng-model="pSikayetEdilenUserCheck" ng-change="profilSikayetSutunFiltresi()">Şikayet Edilen Username</label>
+                                                </div>
+                                                <div class="checkbox" align="left" style="margin:10px;">
+                                                    <label><input type="checkbox" ng-model="pSikayetNedeniCheckk" ng-change="profilSikayetSutunFiltresi()">Şikayet Nedeni</label>
+                                                </div>
+                                                <div class="checkbox" align="left" style="margin:10px;">
+                                                    <label><input type="checkbox" ng-model="pSikayetMetiniCheck" ng-change="profilSikayetSutunFiltresi()">Şikayet Metini</label>
+                                                </div>
+                                                <div class="checkbox" align="left" style="margin:10px;">
+                                                    <label><input type="checkbox" ng-model="pSikayetZamani" ng-change="profilSikayetSutunFiltresi()">Şikayet Zamanı</label>
+                                                </div>
+                                                <div class="checkbox" align="left" style="margin:10px;">
+                                                    <label><input type="checkbox" ng-model="pdegerlendirildi" ng-change="profilSikayetSutunFiltresi()">Şikayet değerlendirilme</label>
+                                                </div>                                                                                                
+                                                <div class="dropdown-divider"></div>
+                                                <div class="dropdown-item" align="center" style="margin:10px;">
+                                                    <div class="col-xs-6" align="right">
+                                                    <button ng-click="profilFiltreHepsiTrue()" class="btn btn-primary"> Hepsini Seç </button>
+                                                        
+                                                    </div>
+                                                    <div class="col-xs-6" align="left">
+                                                        
+                                                    <button ng-click="profilFiltreHepsiFalse()" class="btn btn-danger dropdown-item"> Sıfırla </button>
+                                                    </div>
+                                                </div>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- filtre dropdown bitiş-->
+                             
+                            </div>
+							
+							
+                            <div class="col-xs-12" >
+                            <table class="table talbe-responsive table-striped table-bordered table-fixed cf" >
+                                <thead>
+                                    <tr>
+                                        <th class="col-xs-1"><b>ID</b></th>
+                                        <th class="col-xs-1"><b>Şikayetci </b></th>
+                                        <th class="col-xs-1"><b>Şikayet Edilen</b> </th>  
+                                        <th class="col-xs-2"><b>Şikayet Nedeni</b></th>
+                                        <th class="col-xs-2"><b>Şikayet Metini</b></th>
+                                        <th class="col-xs-2"><b>Şikayet Zamanı</b></th>
+                                        <th class="col-xs-2"><b>Değerlendirilme</b></th>
+                                        <th class="col-xs-1"><b></b></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="veri in pageListProfil">
+                                        <td class="col-xs-1">
+                                        <div>
+                                        {{veri.sikayetId}}
+                                        </div></td>
+                                        <td class="col-xs-1">
+                                        <div style="overflow:auto">
+
+<div ng-show="veri.degerlendirildi == 'AÇIK'"> 
+   <a href=""
+   
+  data-toggle="modal" data-target="#profilGoruntule"
+   ng-click="kullaniciAra(veri.sikayetciUsername)">
+      {{veri.sikayetciUsername}}
+  </a>   
+</div>
+<div ng-show="veri.degerlendirildi == 'KAPALI'">
+  {{veri.sikayetciUsername}}
+</div>                                               
+                                        </div></td>
+                                        <td class="col-xs-1">
+                                        <div style="overflow:auto">
+<div ng-show="veri.degerlendirildi == 'AÇIK'"> 
+   <a href=""
+   
+  data-toggle="modal" data-target="#profilGoruntule"
+   ng-click="kullaniciAra(veri.sikayetEdilenUsername)">
+      {{veri.sikayetEdilenUsername}}
+  </a>   
+</div>
+<div ng-show="veri.degerlendirildi == 'KAPALI'">
+  {{veri.sikayetEdilenUsername}}
+</div>                                                 
+                                        </div></td>
+                                        <td class="col-xs-2">
+                                        <div style="overflow:auto">
+                                        {{veri.sikayetNedeni}}
+                                        </div></td>
+                                        <td class="col-xs-2">
+                                        <div style="overflow:auto; max-width: 100px;">
+                                        {{veri.sikayetMetini}}
+                                        </div></td>
+                                        <td class="col-xs-2">
+                                        <div style="overflow:auto">
+                                        {{veri.sikayetZamani}}
+                                        </div></td>
+                                        <td class="col-xs-2">
+                                        <div style="overflow:auto">
+                                        {{veri.degerlendirildi}}
+                                        </div></td>
+                                        <td class="col-xs-1" align="center" ng-hide="veri.degerlendirildi == 'KAPALI'">
+                                            <button class="btn btn-primary" ng-click="profilSec($index)" data-toggle="modal" 
+                                            data-target="#profilDegerlendir">
+                                                 Değerlendir
+                                            </button>
+                                        </td>
+                                        <td class="col-xs-1" align="center" ng-hide="veri.degerlendirildi == 'AÇIK'">
+                                            <button class="btn btn-primary" ng-click="degerlendirmeDetay(veri)"
+                                             data-toggle="modal" 
+                                            data-target="#degerlendirilmeDetayGoruntule">
+                                                 Detayları Görüntüle
+                                            </button>
+                                        </td>                                        
+                                    </tr>
+                                </tbody>
+                                <tfoot >
+                                    <tr>
+                                        <td colspan="19" style="text-align: left;" >
+                                            <div align="center">
+                                            <paging datasource="profilSikayetTabloVerisi" page-data="pageListProfil" 
+                                            page-size="10" filtre="profilSikayetAranacakKelime" 
+                                            filter-variables="globalProfilSikayetFilter"></paging>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                             </div>
+							 
+							 
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Profil Şikayet Bitiş -->
+
+
+
+<!-- İçerik Görüntüle Başlangıç -->
+<div class="tab-content" style="margin-top: 20px;">
+    <div class="tab-pane" ng-class="{active: activeTab === 4}">
+        <div class="panel panel-info ">
+            <div class="panel-heading" >
+                <div align="center">                
+                    <b style="font-size: 15px;" class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Parametrik Değerler</a>
+                    </b>
+
+                    <button type="submit" class="btn btn-primary pull-right" 
+                    style="margin-top: -8px;" 
+                    ng-show="true" data-toggle="collapse" data-target="#collapseFour">
+                                X
+                    </button>
+                </div>
+            </div>
+            </div>
+
+            <div id="collapseFour" class="panel-collapse collapse in" >
+                <div class="container col-xs-12" >
+                    <div class="row" >
+                        <div class="panel panel-default" >
+                            <div class="panel-heading">
+                             
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- İçerik Görüntüle Bitiş -->
+
+
+<!-- Yorum Şikayet Listesi Tablosuz Başlangıç -->
+
+<div class="tab-content" style="margin-top: 20px;">
+    <div class="tab-pane" ng-class="{active: activeTab === 5}">
+        <div class="panel panel-info ">
+            <div class="panel-heading" >
+                <div align="center">                
+                    <b style="font-size: 15px;" class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Destek Mesajları</a>
+                    </b>
+
+                    <button type="submit" class="btn btn-primary pull-right" 
+                    style="margin-top: -8px;" 
+                    ng-show="true" data-toggle="collapse" data-target="#collapseFive">
+                                X
+                    </button>
+                </div>
+            </div>
+
+            <div id="collapseOne" class="panel-collapse collapse in" >
+                <div class="container col-xs-12" >
+                    <div class="row" >
+                        <div class="panel panel-default" >
+                            <div class="panel-heading">
+
+                                    <div class="row" align="center" style="margin: 10px;">
+                                        <form class="form-inline" role="form">
+                                            <div class="form-group has-success has-feedback">
+                                                <label class="control-label"></label>
+                                                <img src="images/searchIcon.png">
+                                                <input ng-model="destekMesajiAra" class="form-control" placeholder="İçerik Ara..." 
+                                                style="max-width: 250px; border:1px solid grey; margin-right: 30px; ">
+                                            </div>
+                                        </form>  
+                                    </div>              
+                            </div>
+                             <div class="col-xs-12" >
+                            <table class="table talbe-responsive table-striped table-bordered table-fixed cf" >
+                                <thead>
+                                    <tr>
+                                        <th class="col-xs-2"><b>ID</b></th>
+                                        <th class="col-xs-2"><b>Yollayan Bilgileri</b></th>
+                                        <th class="col-xs-2"><b>Mesaj</b> </th>  
+                                        <th class="col-xs-2"><b>Mail</b></th>
+                                        <th class="col-xs-2"><b>Telefon</b></th>
+                                        <th class="col-xs-2"><b>Tarih</b></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="veri in pageListDestek">
+                                        <td class="col-xs-2">
+                                        <div>
+                                        {{veri.id}}
+                                        </div>
+                                        </td>
+                                        <td class="col-xs-2">
+                                        <div>
+                                        {{veri.name}}
+                                        </div>
+                                        </td>
+                                        <td class="col-xs-2">
+                                        <div>
+                                        {{veri.message}}
+                                        </div>
+                                        </td>
+                                        <td class="col-xs-2">
+                                        <div>
+                                        {{veri.mail}}
+                                        </div>
+                                        </td>                                         
+                                        <td class="col-xs-2">
+                                        <div>
+                                        {{veri.phone}}
+                                        </div>
+                                        </td>
+                                        <td class="col-xs-2">
+                                        <div>
+                                        {{veri.date}}
+                                        </div>
+                                        </td>                                     
+                                    </tr>
+                                </tbody>
+                                <tfoot >
+                                    <tr>
+                                        <td colspan="19" style="text-align: left;" >
+                                            <div align="center">
+                                            <paging datasource="destekMesajlari" page-data="pageListDestek" 
+                                            page-size="10" filtre="destekMesajiAra" 
+                                            filter-variables="destekFilters"></paging>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>                                
+   
+                             </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Yorum Şikayet Listesi Tablosuz Bitiş -->
+
+
+
+        <!-- Yorum degerlendir ayrıntı popup başlangıç -->
+        <!-- Modal -->
+        <div class="modal fade" id="yorumDegerlendir" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&#10006;</button>
+                        <h4 class="modal-title" align="center">Yorum Şikayet Değerlendir</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <select class="form-control" id="gizleSelectYorum">
+                                <option value="0" selected>Gizle</option>
+                                <option value="1">Gizleme</option>
+                            </select>                           
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <textarea rows="4" cols="50" class="form-control" 
+                            ng-model="yorumSikayetAciklama"
+                            placeholder="Açıklama giriniz.."></textarea>
+                        </div>
+                        <div align="center" style="margin-top: 10px;">
+                            <button class="btn btn-primary btn-block btn-xs" 
+                            ng-click="sikayetDegerlendir(1)"
+                            style="height: 40px; max-width: 150px;">Kaydet</button>
+                        </div>
+                    </div>
+                    <!-- modal body bitiş -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Yorum degerlendir ayrıntı popup bitiş -->
+
+
+
+        <!-- Gönderi degerlendir ayrıntı popup başlangıç -->
+        <!-- Modal -->
+        <div class="modal fade" id="gonderiDegerlendir" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" ng-click="">&#10006;</button>
+                        <h4 class="modal-title" align="center">Gönderi Şikayet Değerlendir</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <select class="form-control" id="gizleSelectGonderi">
+                                <option value="0" selected>Gizle</option>
+                                <option value="1">Gizleme</option>
+                            </select>                           
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <textarea rows="4" cols="50" class="form-control" 
+                            ng-model="gonderiSikayetAciklama"
+                            placeholder="Açıklama giriniz.."></textarea>
+                        </div>
+                        <div align="center" style="margin-top: 10px;">
+                            <button class="btn btn-primary btn-block btn-xs" 
+                            ng-click="sikayetDegerlendir(2)"
+                            style="height: 40px; max-width: 150px;">Kaydet</button>
+                        </div>
+                    </div>
+                    <!-- modal body bitiş -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" ng-click="" data-dismiss="modal">Kapat</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Gönderi degerlendir ayrıntı popup bitiş -->        
+
+
+
+        <!-- Profil Şikayet Değerlendir ayrıntı popup başlangıç -->
+        <!-- Modal -->
+        <div class="modal fade" id="profilDegerlendir" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" ng-click="">&#10006;</button>
+                        <h4 class="modal-title" align="center">Profil Şikayet Değerlendir</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <select class="form-control" id="gizleSelectProfil">
+                                <option value="0" selected>Gizle</option>
+                                <option value="1">Gizleme</option>
+                            </select>                           
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <textarea rows="4" cols="50" class="form-control" 
+                            ng-model="profilSikayetAciklama"
+                            placeholder="Açıklama giriniz.."></textarea>
+                        </div>
+                        <div align="center" style="margin-top: 10px;">
+                            <button class="btn btn-primary btn-block btn-xs" 
+                            ng-click="sikayetDegerlendir(3)"
+                            style="height: 40px; max-width: 150px;">Kaydet</button>
+                        </div>
+                    </div>
+                    <!-- modal body bitiş -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" ng-click="" data-dismiss="modal">Kapat</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Gönderi degerlendir ayrıntı popup bitiş -->   
+
+
+        <!-- Değerlendirme detay popup başlangıç -->
+        <!-- Modal -->
+        <div class="modal fade" id="degerlendirilmeDetayGoruntule" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" ng-click="">&#10006;</button>
+                        <h4 class="modal-title" align="center">Değerlendirme Detayları</h4>
+                    </div>
+                    <div class="modal-body">
+                        <label for="dSonucDurum">Sonuç Durumu</label>
+                        <input id="dSonucDurum" class="form-control" ng-model="seciliDegerlendirme.sonucDurum" type="" name="" disabled="true">
+                        <label for="dSonucAciklama">Sonuç Açıklaması</label>
+                        <textarea id="dSonucAciklama" class="form-control" ng-model="seciliDegerlendirme.sonucAciklama" type="" name="" disabled="true"></textarea>    
+                        <label for="dSonucAdmin">Karar Veren Admin</label>
+                        <input id="dSonucAdmin" class="form-control" ng-model="seciliDegerlendirme.kararVerenAdmin" type="" name="" disabled="true">    
+                        <label for="dSonucDZamani">Değerlendirilme Zamanı</label>
+                        <input id="dSonucDZamani" class="form-control" 
+                        ng-model="seciliDegerlendirme.degerlendirilmeZamani" type="" name="" disabled="true">                                                                  
+                    </div>
+                    <!-- modal body bitiş -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" ng-click="" data-dismiss="modal">Kapat</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Değerlendirme detay popup bitiş -->   
+
+
+
+
+
+
+
+        <!-- Profil Görüntüle popup başlangıç -->
+        <!-- Modal -->
+        <div class="modal fade" id="profilGoruntule" role="dialog" align="center">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" ng-click="">&#10006;</button>
+                        <h4 class="modal-title" align="center">Profil</h4>
+                    </div>
+                    <div class="modal-body">
+                        <label for="arananUserPP">Kullanıcı Resimi</label>
+                        <img class="img img-responsive" style="max-width: 400px; max-height: 400px;" src="{{userProfilePhoto}}">
+                        <label for="arananUserID">ID</label>
+                        <input id="arananUserID" style="max-width: 200px;" class="form-control" ng-model="user.id" type="" name="" disabled="true">
+                        <label for="arananUserUsername">Kullanıcı Adı</label>
+                        <input id="arananUserUsername"  style="max-width: 200px;"class="form-control" ng-model="user.username" type="" name="" disabled="true">
+                        <label for="arananUserName">İsim</label>
+                        <input id="arananUserName" style="max-width: 200px;" class="form-control" ng-model="user.name" type="" name="" disabled="true">
+                        <label for="arananUserSurname">Soyisim</label>
+                        <input id="arananUserSurname" style="max-width: 200px;" class="form-control" ng-model="user.surname" type="" name="" disabled="true">
+                        <label for="arananUserEmail">E-mail</label>
+                        <input id="arananUserEmail" style="max-width: 200px;" class="form-control" ng-model="user.email" type="" name="" disabled="true">
+                        <label for="arananUserUserInfo">Kişisel Bilgiler</label>
+                        <textarea id="arananUserUserInfo" style="max-width: 200px;" class="form-control" ng-model="user.arananUserUserInfo" type="" name="" disabled="true">
+                        </textarea>   
+                        <label for="arananUserWebsite">Websitesi</label>
+                        <input id="arananUserWebsite" style="max-width: 200px;" class="form-control" ng-model="user.website" type="" name="" disabled="true">
+                        <label for="arananUserTel">Telefon Numarası</label>
+                        <input id="arananUserTel" style="max-width: 200px;" class="form-control" ng-model="user.phone" type="" name="" disabled="true">
+                        <label for="arananUserCreatedAt">Oluşturulma Tarihi</label>
+                        <input id="arananUserCreatedAt" style="max-width: 200px;" class="form-control" ng-model="user.createdAt" type="" name="" disabled="true">
+                        <label for="arananUserHide">Gizli</label>
+                        <input id="arananUserHide" style="max-width: 200px;" class="form-control" ng-model="user.hide" type="" name="" disabled="true">
+                        <label for="arananUserVerified">Onaylı</label>
+                        <input id="arananUserVerified" style="max-width: 200px;" class="form-control" ng-model="user.isVerified" type="" name="" disabled="true">
+
+                        <!--
+                        <div ng-show="userSilinebilirFlag">
+                            <h5 style="font-size: 15px; color: red"> 3 veya daha fazla defa hakkında yapılan şikayetler kabul edilmiş kullanıcılar silinebilir.</h5>
+                            <button class="btn btn-danger" ng-click="userSil()" style="max-width: 50px;">Sil</button>
+                        </div>
+                        -->
+                    </div>
+                    <!-- modal body bitiş -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" ng-click="" data-dismiss="modal">Kapat</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Profil Görüntüle popup bitiş -->                 
+
+
+
+
+            <!-- paylaşım detay pop-up -->
+            <div class="container">
+                <!-- Modal -->
+                <div class="modal"  id="paylasimDetay" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <button type="button" class="close" data-dismiss="modal" ng-click="">&#10006;</button>                          
+                            <div class="modal-header" align="center">
+                                <form role="form" autocomplete="off">
+                                    <div class="col-sm-12 col-md-12" align="center">
+                                        <h5 style="font-size: 12px;">{{tripDetay.explanation}}</h5> 
+                                        <a href="">
+                                            <h5 style="font-size: 12px;">
+                                                @{{tripOlusturucInfo.username}} kullanıcısı oluşturdu. {{olusturulmaZamani}}          
+                                            </h5>
+                                        </a>  
+                                        <a href="" ng-show="isPaylasimFlag">
+                                            <h5 style="font-size: 12px;">
+                                                @{{tripPaylasimciUsername}} paylaştı. 
+                                                {{paylasilmaZamani}}           
+                                            </h5>                                            
+                                        </a>                                                   
+                                    </div>
+                                </form>
+                            </div>
+                            <br>
+                            <div class="modal-body" >
+                                <form role="form" autocomplete="off">
+                                <!--map row -->
+                                    <div class="row" ng-show="!showMedyaDetayPaneFlag">           
+                                        <div class="col-sm-12 col-md-12" align="center">
+                                            <div class="form-group">
+                                                  <ng-map id="polylineMap"  zoom="22" center="[{{initialPosition[0]}}, {{initialPosition[1]}}]" map-type-id="{{mapGorunum}}">
+                                                    <shape name="polyline" 
+                                                      path="{{tripPath}}"
+                                                      geodesic="true"
+                                                      stroke-color="#FF0000"
+                                                      stroke-opacity="1.0"
+                                                      stroke-weight="8">
+                                                    </shape>
+
+
+                                                    <custom-marker 
+                                                    ng-repeat="pic in tripPictures"
+                                                    id="foo" position="{{pic.lat}}, {{pic.long}}">
+                                                      
+                                                      <a href="" title="Görüntüle"
+                                                      ng-click="showMedyaDetay(pic.url,1)">
+                                                         <img style="width:40px; height:40px;" src="/Geziyorum/images/harita/photo.png">
+                                                      </a>
+                                                    </custom-marker>  
+
+                                                    <custom-marker 
+                                                    ng-repeat="video in tripVideos"
+                                                    id="foo" position="{{video.lat}}, {{video.long}}">
+                                                    <a href="" title="Oynat"
+                                                    ng-click="playVideo($index)">
+                                                        <img style="width:35px; height:35px;" src="/Geziyorum/images/harita/camera.png">                                       
+                                                    </a>
+                                                    </custom-marker>
+                                                    <custom-marker 
+                                                    ng-repeat="audio in tripAudios"
+                                                    id="foo" position="{{audio.lat}}, {{audio.long}}">
+                                                      
+                                                      <a href="" title="Oynat"
+                                                      ng-click="playAudio($index)">
+                                                        <img style="width:30px; height:30px;" src="/Geziyorum/images/harita/audio.png">
+                                                      </a>
+                                                    </custom-marker>  
+                                                  
+                                                    <marker position="[{{initialPosition[0]}}, {{initialPosition[1]}}]"></marker>       <!--takip edecek küçük tag. -->     
+                                                </ng-map>                                                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-12" align="center">
+                                            <div class="form-group">
+                                                <button style="max-width: 250px; margin: 15px;"
+                                                 class="btn btn-primary btn-block btn-sm" ng-click="changeGorunum()">
+                                                    {{gorunumButtonMetni}}
+                                                 </button> 
+
+
+                                                <!--
+                                                <map id="svMap" 
+                                                ng-show="streetGoster"
+                                                street-view="StreetViewPanorama(document.querySelector('map#svMap'), {position: {{obj}} })" />
+                                                <img 
+                                                id="photo"
+                                                class="img img-responsive img-rounded" 
+                                                src="images/sharedTrip/map.png" 
+                                                style="max-width: 300px; max-height: 300px;"
+                                                >  -->
+                                            </div>                                            
+                                        </div>           
+                                        <div class="col-xs-6 col-sm-6 col-md-6" align="center">
+                                            <div class="form-group">
+                                                            <label style="font-size: 10px" for="lokasyon">Yer</label>
+                                                            <h5 style="font-size: 10px" id="lokasyon">
+                                                                {{tripDetay.location}}
+                                                            </h5>                                                  
+                                            </div>                                            
+                                        </div>      
+                                        <div class="col-xs-6 col-sm-6 col-md-6" align="center">
+                                            <div class="form-group">
+                                                            <label style="font-size: 10px" for="zaman">Zaman</label>                                                            
+                                                            <h5 style="font-size: 10px" id="zaman">
+                                                                Başlangıç - {{tripDetay.starTime}}
+                                                                <br>
+                                                                Bitiş - {{tripDetay.endTime}}
+                                                            </h5>                                                
+                                            </div>                                            
+                                        </div>  
+                                        <div class="col-xs-12 col-sm-12 col-md-12" align="center">
+                                            <label style="font-size: 10px" for="tripYapilis">Gezi Yapılış Şekili</label>                                                            
+                                            <h5 style="font-size: 10px" id="tripYapilis">
+                                                {{tripDetay.tripType}}
+                                            </h5>                                            
+                                        </div>                                          
+                                        <div class="col-xs-12 col-sm-12 col-md-12" ng-show="grupGezisiFlag" align="center">
+                                            <div class="form-group">
+                                                <label style="font-size: 10px" for="zaman">Bu bir grup gezisidir. <br> Grup Gezisi Katılımcıları :</label>
+                                                <h5 style="font-size: 12px" ng-repeat="user in geziKatilimcilarInfo">
+                                                    <hr ng-hide="$index == 0">
+                                                    <a href="/Geziyorum/@{{user.username}}">
+                                                        {{user.username}}
+                                                    </a>
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12" >
+                                            <div class="form-group">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">Medya</div>                                                
+                                                    <div class="panel-body">   
+
+                                                      <div class="row" 
+                                                      style="margin-top: 10px; max-height: 250px; overflow-y: auto;">
+                                                        <div ng-repeat="picture in tripPictures track by $index" align="center">
+                                                            <hr ng-hide="$index==0">
+                                                            <div class="col-sm-7" style="margin: 15px;"  ng-show="showTripPictures">
+                                                                <a href="" ng-click="showMedyaDetay(picture.url,1)">
+                                                                    <img 
+                                                                    class="img img-responsive img-rounded" 
+                                                                    src="{{picture.url}}" 
+                                                                    style="max-width: 200px; max-height: 200px;">                                             
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-sm-3" style="margin-top: 30px;">
+                                                                <h5 style="word-wrap: break-word; font-size: 12px;">
+                                                                  <a href="/Geziyorum/@{{picture.creatorUsername}}">
+                                                                    {{picture.creatorUsername}}  
+                                                                  </a>
+                                                                  - {{picture.yorum}}
+                                                                </h5>
+                                                            </div>
+                                                            <div class="col-sm-2" ng-show="showGonderiDuzenleCheck">
+                                                                <input type="checkbox" style="width: 30px; height: 30px;" ng-click="chooseDownloadMedia(picture.id,picture.indirCheck)" ng-model="picture.indirCheck" name="">
+                                                            </div>                                                            
+                                                        </div>  
+                                                        <div class="col-sm-12" ng-repeat="video in tripVideos" 
+                                                        align="center" 
+                                                        ng-show="showTripVideos">
+                                                            <hr>
+                                                            <div class="col-sm-7" style="margin: 15px;" >
+                                                                <a href="" ng-click="playVideo($index)">
+                                                                    <video id="video{{$index}}"
+                                                                     width="200" height="200" controls
+                                                                     controlsList="nodownload">
+                                                                         <source src="{{video.url}}" type="video/mp4">
+                                                                    </video>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-sm-3" style="margin-top: 30px;">
+                                                                <h5 style="word-wrap: break-word; font-size: 12px;">
+                                                                    <a href="/Geziyorum/@{{video.creatorUsername}}">
+                                                                        {{video.creatorUsername}}
+                                                                    </a>
+                                                                    - {{video.yorum}}
+                                                                </h5>                                                              
+                                                            </div>
+                                                            <div class="col-sm-2" ng-show="showGonderiDuzenleCheck">
+                                                                <input type="checkbox" style="width: 30px; height: 30px;" ng-click="chooseDownloadMedia(video.id,video.indirCheck)" ng-model="video.indirCheck" name="">
+                                                            </div>                                                            
+                                                        </div>
+
+                                                        <!-- audio -->
+                                                        <div class="col-sm-12" ng-repeat="audio in tripAudios" 
+                                                         align="center"   
+                                                         ng-show="showTripAudios">
+                                                            <hr>
+                                                            <div class="col-sm-7">
+                                                                <a href="" ng-click="playAudio($index)">
+                                                                    <audio id="audio{{$index}}"  
+                                                                    controls 
+                                                                    controlsList="nodownload"
+                                                                    style="width: 200px;">
+                                                                      <source   src="{{audio.url}}"  type="audio/mpeg">
+                                                                    </audio> 
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <h5 style="word-wrap: break-word; font-size: 12px;">
+                                                                   <a href="/Geziyorum/@{{audio.creatorUsername}}">
+                                                                   {{audio.creatorUsername}}    
+                                                                   </a>
+                                                                   - {{audio.yorum}}
+                                                                </h5>                                                                 
+                                                            </div>
+                                                            <div class="col-sm-2" ng-show="showGonderiDuzenleCheck">
+                                                                <input type="checkbox" style="width: 30px; height: 30px;" ng-click="chooseDownloadMedia(audio.id,audio.indirCheck)" ng-model="audio.indirCheck" name="">
+                                                            </div>                                                            
+                                                        </div>
+                                                    </div>
+                                                    <!--medya bitiş row -->
+
+                                                    </div>
+                                                </div>                                                 
+                                            </div>                                            
+                                        </div>   
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                           
+                                            <div class="form-group">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">Yorumlar</div>
+                                                    <div class="panel-body" style="margin-top: 10px;">
+                                                        <div class="row" style="max-height: 250px; overflow-y: auto;">
+                                                            
+                                                        
+                                                        <div ng-repeat="comment in seciliGonderiCommentleri track by $index" style="margin-bottom:-20px;">
+
+                                                            <div class="col-xs-8 col-sm-8 col-md-8">
+                                                            <hr ng-hide="$index==0">
+                                                                          <label class="mr-sm-2" for="commentContent">
+                                                                          <a href="" style="font-size: 15px;">
+                                                                              {{comment.username}}
+                                                                          </a>
+                                                                          </label>
+                                                                          <h5 class="custom-select mb-2 mr-sm-2 mb-sm-0" id="commentContent" style="font-size: 12px; word-wrap: break-word">{{comment.content}}</h5>                                                                  
+                                                            </div> 
+                                                            <div class="col-xs-4 col-sm-4 col-md-4" align="center">
+                                                                 <hr ng-hide="$index==0">
+                                                                 <!--<div align="center" ng-hide="comment.username == headerUsername">
+
+                                                                <a href="" ng-click="showYorumSikayet($index)">
+                                                                <img style="width: 15px; height: 15px;" src="/Geziyorum/images/sikayet.png" class="img img-responsive">
+                                                                </a>                                                                           
+                                                                 </div>
+                                                                    -->
+                                                                 <h5 style="font-size: 12px">{{comment.sendTime}}</h5>
+                                                            </div>                                                            
+
+                                                        </div>   
+
+                                                        </div>
+                                                    </div>
+                                                </div>                                             
+                                            </div>
+                                        </div>                              
+                                        <div class="col-xs-3 col-sm-3 col-md-3" >
+                                            <div class="form-group">
+                                                <div style="font-size: 10px">
+                                                    <div ng-show="!ifLiked">
+                                                       
+                                                        <img style="height: 32px; width: 32px;" src="/Geziyorum/images/notliked.png">
+                                                       
+                                                       <h5 style="display: inline;"
+                                                       ng-hide="begenPaylasCount.likeCount == 0">
+                                                          {{begenPaylasCount.likeCount}} 
+                                                       </h5>
+                                                    </div>
+                                                    <div ng-show="ifLiked">
+                                                       
+                                                        <img style="height: 32px; width: 32px;" src="/Geziyorum/images/liked.png">
+                                                       
+                                                       <h5 style="display: inline;"
+                                                       ng-hide="begenPaylasCount.likeCount == 0">
+                                                          {{begenPaylasCount.likeCount}} 
+                                                       </h5>                                                       
+                                                    </div>                                                    
+                                                </div>
+                                            </div>
+                                        </div>                                         
+                                        <div class="col-xs-3 col-sm-3 col-md-3" >
+                                            <div class="form-group"> 
+                                                <div style="font-size: 10px">
+                                                    <div>
+                                                        <img style="height: 32px; width: 32px;" src="/Geziyorum/images/share.png">
+                                                       <h5 style="display: inline;"
+                                                       ng-hide="begenPaylasCount.shareCount == 0">
+                                                           {{begenPaylasCount.shareCount}}
+                                                       </h5>                                                  
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                      
+                                    </div>
+                                </form>
+
+       
+                            </div>
+
+                           <div align="center">
+                                <hr>
+                                <button class="btn btn-danger btn-block btn-sm" style="max-width: 200px;" data-dismiss="modal">Kapat</button>
+                                <br>
+                                
+                            </div>
+                            <!-- modal body bitiş-->                          
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- paylaşım detay pop-up bitiş -->          
+
+
+
+</body>
+</html>

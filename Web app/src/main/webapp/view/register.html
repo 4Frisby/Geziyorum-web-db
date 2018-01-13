@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="geziyorumAppModel" lang="tr-TR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap-glyphicons.css">    
+    <script type="text/javascript" src="lib/js/angular-1.4.4.min.js"></script>
+    <script type="text/javascript" src="lib/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="lib/js/bootbox.min.js"></script>
+    <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/js/mainAngularModule.js"></script>  
+    <script type="text/javascript" src="lib/js/registerCTRL.js"></script>
+        
+<meta charset="UTF-8">
+<title>Geziyorum ^_^ </title>
+</head>
+<body>
+	<div ng-controller="indexCTRL">
+        <form role="form">
+
+                <div class="row" align="center">
+                    <div class="form-group">
+                        <label class="control-label">Kullanıcı Adı</label>
+                        <div>
+                            <input type="text" class="form-control" ng-model="regUserName" style="max-width: 300px"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" align="center">
+                    <div class="form-group">
+                        <label class="control-label">Şifre</label>
+                        <div>
+                            <input type="text" class="form-control" ng-model="regPassword" style="max-width: 300px"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" align="center">
+                    <div class="form-group">
+                        <label class="control-label">Şifre Onay</label>
+                        <div>
+                            <input type="text" class="form-control" ng-model="regPasswordValidation" style="max-width: 300px"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" align="center">
+                    <div class="form-group">
+                        <label class="control-label">İsim</label>
+                        <div>
+                            <input type="text" class="form-control" ng-model="regName" style="max-width: 300px"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" align="center">
+                    <div class="form-group">
+                        <label class="control-label">Soyisim</label>
+                        <div>
+                            <input type="text" class="form-control" ng-model="regSurname" style="max-width: 300px"/>
+                        </div>
+                    </div>
+                </div>   
+                <div class="row" align="center">
+                    <div class="form-group">
+                        <label class="control-label">Mail</label>
+                        <div>
+                            <input type="text" class="form-control" ng-model="regMail" style="max-width: 300px"/>
+                        </div>
+                    </div>
+                </div>                                                             
+                <div class="row" align="center">
+                	<button class="btn btn-danger" style="max-width: 200px;" ng-click="register()">Kayıt Ol !</button>
+                </div>
+        </form>
+	</div>
+</body>
+</html>

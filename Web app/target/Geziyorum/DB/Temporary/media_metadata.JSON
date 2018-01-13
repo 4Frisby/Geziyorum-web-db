@@ -1,0 +1,29 @@
+[  
+   {  
+      "path":"a.mp3",
+      "type":"record",
+      "longitude":28.8903333333333,
+      "latitude":41.0303666666667,
+      "altitude":110.5,
+      "share_option":"everybody",
+      "note":"ses kaydı"
+   },
+   {  
+      "path":"b.mp4",
+      "type":"video",
+      "longitude":28.8904916666667,
+      "latitude":41.0303433333333,
+      "altitude":110.5,
+      "share_option":"everybody",
+      "note":"video"
+   },
+   {  
+      "path":"c.jpg",
+      "type":"photo",
+      "longitude":28.890065,
+      "latitude":41.030255,
+      "altitude":110.6,
+      "share_option":"everybody",
+      "note":"fotoğraf"
+   }
+]

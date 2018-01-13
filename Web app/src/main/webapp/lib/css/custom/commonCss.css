@@ -1,0 +1,87 @@
+
+#loading-bar {
+  pointer-events: all;
+  z-index: 99999;
+  border: none;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  cursor: wait;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+#footerStyle {
+    font-size: 13px; font-weight: bold;
+}
+
+.verticalLine {
+  border-left: thick solid #ff0000;
+}
+
+#searchBar{
+	margin-top: 10px; max-height: 50px; max-width:800px; background-color: rgb(253,250,250);
+}
+
+#navbarBack{
+	background-color: rgb(150,250,250);
+}
+
+.headerTextStyle{
+	opacity: 0.5; font-size: 12px;
+}
+
+body
+{
+  font-family: 'Roboto', sans-serif;
+  /*color: #B7C4CB;*/
+  margin:0;
+  padding:0;
+  width: 100%;
+  height: 100%;
+}
+
+body > div {
+    margin-top: 10px;
+}
+
+a {
+    /*font-size: 0.9em;*/
+    color: #72B032;
+    /*color: #86BB4F;*/
+}
+
+a, a:hover, a:focus, a:visited {
+    text-decoration: none;
+}
+
+/** General HTML style - F */
+
+canvas {
+    margin-bottom: 15px;
+}
+
+/*#monthDrop*/
+.dropdown button .btn-default {
+    width:100%;
+    border-color: red;
+}
+
+.balance {
+    line-height: 36px;
+    font-size:36px
+}
+
+.title {
+    color: #a0aeb6;
+    line-height: 14px;
+    font-size:14px;
+    margin-bottom: 10px;
+}
+
+.modal-backdrop { /* modal pop up tıklanamıyordu bu kod ona engel oluyor*/
+  z-index: -1;
+}

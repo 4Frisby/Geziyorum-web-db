@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html ng-app="geziyorumAppModel" lang="tr-TR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">    
+
+    <link rel="stylesheet" type="text/css" href="lib/css/lib/bootstrap-glyphicons.css">    
+    <link rel="stylesheet" type="text/css" href="lib/css/lib/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/custom/aboutuspage.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/custom/commonCss.css">    
+    <script type="text/javascript" src="lib/js/lib/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/js/lib/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="lib/js/lib/angular-1.4.4.min.js"></script>
+    <script type="text/javascript" src="lib/js/lib/bootbox.min.js"></script>
+    <script type="text/javascript" src="lib/js/module/mainAngularModule.js"></script>      
+    <script type="text/javascript" src="lib/js/controllers/aboutuspageCTRL.js"></script>
+    <script type="text/javascript" src="lib/js/common/commonFuncs.js"></script>
+    <script type="text/javascript" src="lib/js/directives/js/logoutHeaderDirective.js"></script> 
+        
+    <title>Geziyorum ^_^ </title>
+</head>
+
+<body style="background-color: rgb(247,247,247);">
+    <div ng-controller="aboutuspageCTRL">
+        <div class="container-fluid">
+
+
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid" id="headerBackground" >
+            <div class="navbar-header">
+            <div class="row">
+                <a class="navbar-brand" >
+                    <div>
+                    </div>
+                    <div>
+                        <img style="width: 100px; height: 50px;" src="images/siteIcon2.png">
+                    </div>
+                </a>
+            </div>
+            <div class="row">
+            <a class="navbar-brand" style="margin-bottom:  -20px; margin-top: -20px;" >
+                <h5 style="opacity: 0.5; font-size: 12px;">Mağazadan ücretsiz edin.</h5>
+            </a>
+            </div>
+            </div>                   
+          </div>
+        </nav> 
+
+
+        <div class="row" align="center">
+          <section id="contact" style="max-width: 1200px;">
+              <div class="section-content">
+                  <h1 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s">Hakkımızda</span></h1>
+                  <div class="col-xs-12" align="center">
+                  <p align="left" style="max-width: 400px; font-size: 20px;">
+Gezi-yorum uygulaması, Tarık Nural ve Murat Baki Yücel'in Yrd. Doç. Dok. Ahmet Tevfik İnan danışmanlığında hazırlamış oldukları bir bitirme projesidir.
+                    
+                  </div>
+              </div>
+          </section>
+        </div>
+
+  <div class="navbar navbar-light">
+    <div class="container-fluid">
+    <div class="row">
+        <hr>
+        <div class="col-sm-4 col-sm-offset-2">
+        <div class="pull-left">
+            <div class="col-sm-4">
+              <a class="navbar-text" onclick="redirectPrivacyPage()" id="footerStyle">GİZLİLİK 
+              </a>
+                
+            </div>
+            <div class="col-sm-4">
+              <a class="navbar-text" onclick="redirectAboutusPage()" id="footerStyle">HAKKIMIZDA
+              </a>        
+            </div>
+            <div class="col-sm-4">
+              <a class="navbar-text" onclick="redirectSupportPage()" id="footerStyle" ng-click="redirectSupportPage()">DESTEK
+              </a>        
+            </div>
+        </div>
+            
+        </div>
+        <div class="col-sm-4">
+        <div class="pull-right">            
+              <p class="navbar-text" id="footerStyle" style="opacity: 0.8;">
+              <strong>
+              © 2017 Geziyorum
+              </strong>
+              </p>        
+        </div>    
+        </div>
+    </div>
+    </div>
+  </div>
+
+
+        </div>
+    </div>
+</body>
+
+</html>
