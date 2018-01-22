@@ -25,6 +25,7 @@
 /home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/mapper/SupportMessageRowMapper.java
 /home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/service/ProfilePageGetUserInfoService.java
 /home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/controller/trip/TripDeleteController.java
+/home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/service/TripDeleteMediaService.java
 /home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/mapper/TripUsersRowMapper.java
 /home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/controller/common/CheckUserActivated.java
 /home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/mapper/SessionRowMapper.java
@@ -228,6 +229,7 @@
 /home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/controller/admin/GetFakeSession.java
 /home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/service/CommonPageGetSharingCountService.java
 /home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/argumentresolver/TokenUser.java
+/home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/controller/trip/TripDeleteMedia.java
 /home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/mapper/WhereHappenedRowMapper.java
 /home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/mapper/ForgotPasswordRowMapper.java
 /home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/service/TripCreateDemandService.java
@@ -267,6 +269,7 @@
 /home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/mapper/CityRowMapper.java
 /home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/argumentresolver/CommentToken.java
 /home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/controller/home/GetFriendPaylasimList.java
+/home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/controller/trip/CheckOwnerSent.java
 /home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/service/CommonPageLikeTripService.java
 /home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/dao/LoginPageDaoImpl.java
 /home/tarik/workspace/GeziyorumApp/src/main/java/com/geziyorum/controller/search/SearchTripController.java

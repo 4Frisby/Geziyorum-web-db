@@ -125,6 +125,7 @@ public interface CommonDao {
 	User getUserByIdForAdmin(Integer userId);
 	PersonalSharing getPersonalSharingByIdForAdmin(Integer id) throws IOException;
 	ArrayList<TripMedia> getAllTripMediaForAdmin(Integer tripId);
+	Boolean deleteMediaByFilename(String mediaName);
 	
 
 }

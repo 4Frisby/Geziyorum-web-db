@@ -61,8 +61,10 @@ public class AramaDaoImpl implements AramaDao{
 	public ArrayList<SearchResultUser> findUserBySearchText(String aramaMetini) {
 		aramaMetini = "%" + aramaMetini + "%";
 		ArrayList<SearchResultUser> searchResultUserList = new ArrayList<SearchResultUser>();
-		final String sql = "select u.username,u.name,u.surname,u.personal_info,pp.photo_name from users u, profile_photo pp where u.id = pp.user_id and u.hide = 0 and u.username like ?"; // user_one = user, user_two = friend
-		List<Map<String, Object>> rows = this.jdbcTemplate.queryForList(sql,aramaMetini);
+		final String sql = "select u.username,u.name,u.surname,u.personal_info,pp.photo_name from users u, profile_photo pp"
+				 +" where u.id = pp.user_id and u.hide = 0 "
+				 + " and (u.username like ? or u.name like ? or u.surname like ?)"; // user_one = user, user_two = friend
+		List<Map<String, Object>> rows = this.jdbcTemplate.queryForList(sql,new Object[]{aramaMetini,aramaMetini,aramaMetini});
 		
 		for(Map row : rows){
 			SearchResultUser searchResultUser = new SearchResultUser(); 
@@ -80,9 +82,9 @@ public class AramaDaoImpl implements AramaDao{
 	@Override
 	public Boolean checkSearchedUserExist(String aramaMetini) {
 
-		final String sql = "SELECT count(*) from users where hide = 0 and username like ?";
+		final String sql = "SELECT count(*) from users where hide = 0 and (username like ? or name like ? or surname like ?)";
 	    aramaMetini = "%" + aramaMetini + "%";
-		Integer ifExist = this.jdbcTemplate.queryForObject(sql,new Object[] {aramaMetini},Integer.class);
+		Integer ifExist = this.jdbcTemplate.queryForObject(sql,new Object[] {aramaMetini,aramaMetini,aramaMetini},Integer.class);
 		if(ifExist>=1)
 			return true;
 		else
@@ -94,13 +96,13 @@ public class AramaDaoImpl implements AramaDao{
 		aramaMetini = "%" + aramaMetini + "%";
 		ArrayList<TripSearch> tripSearchList = new ArrayList<TripSearch>();
 		List<Map<String, Object>> rows;
-		String sql ="select ps.id,u.username,pp.photo_name,t.location,t.explanation,t.folder_name from personal_sharing ps, trip t, profile_photo pp, users u\n" + 
-				"where t.id = ps.trip_id \n" + 
-				"and ps.owner_id = t.creator_user_id\n" + 
-				"and u.id = t.creator_user_id\n" + 
-				"and pp.user_id = u.id\n" + 
-				"and u.hide = 0 and ps.hide=0\n" +
-				"and (t.explanation like ? or t.location like ?)";
+		String sql ="select ps.id,u.username,pp.photo_name,t.location,t.explanation,t.folder_name" 
+				+" from personal_sharing ps, trip t, profile_photo pp, users u"
+				+" where t.id = ps.trip_id"
+				+" and u.id = ps.owner_id"
+				+" and pp.user_id = u.id" 
+				+" and u.hide = 0 and ps.hide = 0"
+                +" and (t.explanation like ? or t.location like ?)";
 		
 		if(kimlerArasinda.equals("Sadece Arkadaşlar")){
 			sql += " and u.id in (select user_two from friend where user_one = ?)";

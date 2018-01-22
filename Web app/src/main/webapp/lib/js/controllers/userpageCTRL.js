@@ -337,7 +337,7 @@ $scope.getVisitorUserGeneralInfo = function(callback){
          callback(response);
         }, function (response) {
             $scope.error=JSON.parse(response.data);
-            bootbox.alert($scope.error.message);
+            //console.log($scope.error.message);
             $scope.restCounterOnError();
         });
 }	
@@ -370,7 +370,7 @@ $scope.cikisYap = function(){
     location.href="/Geziyorum";
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        //console.log($scope.error.message);
     }); 
 
 }
@@ -473,7 +473,7 @@ $scope.aramaYap = function(){
           location.href="search"; 
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        //console.log($scope.error.message);
     }); 
 
 }
@@ -498,7 +498,7 @@ $scope.getPaylasimList = function(oken,username,callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        //console.log($scope.error.message);
     });     
 }
 
@@ -521,7 +521,7 @@ $scope.getTripYorumInfo = function(){
 
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        //console.log($scope.error.message);
     });   
 
 }
@@ -549,7 +549,7 @@ $scope.getPersonalSharingLikeCount = function(){
 
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        //console.log($scope.error.message);
     });   
 
 }
@@ -578,7 +578,7 @@ $scope.getTripSharedCount = function(){
 
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        //console.log($scope.error.message);
     });   
 
 }
@@ -611,7 +611,7 @@ $scope.commentTrip = function(){
 
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        //console.log($scope.error.message);
     });   
 
 }
@@ -636,7 +636,7 @@ $scope.getSikayetList = function(token,callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        //console.log($scope.error.message);
     });   
 
 }
@@ -676,7 +676,7 @@ $scope.yorumSikayetEt = function(){
           bootbox.alert("Talebiniz oluşturuldu.");
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        //console.log($scope.error.message);
     });   
 
 }
@@ -855,7 +855,7 @@ $scope.getUserInfoByUserId = function(token,userID,callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        //console.log($scope.error.message);
     });   
 
 }
@@ -879,7 +879,7 @@ $scope.getTripMedia = function(token,tripId,callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        //console.log($scope.error.message);
     });   
 
 }
@@ -904,7 +904,7 @@ $scope.getPersonalSharingDetay = function(token,psID,callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        //console.log($scope.error.message);
     });   
 
 }
@@ -930,7 +930,7 @@ $scope.getTripDetay = function(token,tripId,callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        //console.log($scope.error.message);
     });   
 
 }
@@ -954,7 +954,7 @@ $scope.getTripPath = function(token,tripId,callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        //console.log($scope.error.message);
     });  
 }
 
@@ -977,7 +977,7 @@ $scope.getOlusturucuInfo = function(token,tripId,callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        //console.log($scope.error.message);
     });   
 
 }
@@ -1002,7 +1002,7 @@ $scope.checkGrupGezisi = function(token,tripId,callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        //console.log($scope.error.message);
     }); 
 }
 
@@ -1025,7 +1025,7 @@ $scope.getKatilimcilarInfo = function(token,tripId,callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        //console.log($scope.error.message);
     }); 
 
 }
@@ -1177,7 +1177,7 @@ $scope.checkIfILikeTrip = function(token,personalSharingId){
       $scope.begenButtonText = "Beğen";
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        //console.log($scope.error.message);
     }); 
 }
 
@@ -1202,7 +1202,7 @@ $scope.getPersonalSharingComments = function(token,psID,callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        //console.log($scope.error.message);
     });   
 
 }
@@ -1233,6 +1233,7 @@ $scope.commentOnPersonalSharing = function(){
     }
 
    $http.post(url, data, config).then(function (response) {
+     $scope.yorumIcerik = "";    
      $scope.getPersonalSharingComments($scope.sessionCookie,$scope.seciliGonderi.personalSharingId,function(response){
          var comments = JSON.parse(response.data);
          for(i=0; i<comments.length; i++ ){
@@ -1245,6 +1246,7 @@ $scope.commentOnPersonalSharing = function(){
         className: 'info'
       });  
     }, function (response) {
+        $scope.yorumIcerik = "";      
         $scope.error=JSON.parse(response.data);
         ngToast.create({
           content: $scope.error.message,
@@ -1340,7 +1342,7 @@ $scope.tripDownload = function(tId){
         link.click();    
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        //console.log($scope.error.message);
     });   
 }
 
@@ -1512,7 +1514,7 @@ bootbox.confirm({
                 location.reload();
       }, function (response) {
           $scope.error=JSON.parse(response.data);
-          bootbox.alert($scope.error.message);
+          //console.log($scope.error.message);
       });      
     }
 });
@@ -1553,7 +1555,7 @@ bootbox.confirm({
                 location.reload();
       }, function (response) {
           $scope.error=JSON.parse(response.data);
-          bootbox.alert($scope.error.message);
+          //console.log($scope.error.message);
       });     
     }
 });
@@ -1680,7 +1682,7 @@ $scope.getFriendsCount = function(callback){
 
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     }); 
 
 }
@@ -1703,7 +1705,7 @@ $scope.getRootDB = function(callback){
 
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     }); 
 
 }
@@ -1730,7 +1732,7 @@ $scope.getSharingCount = function(callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     });   
 
 }
@@ -1754,7 +1756,7 @@ $scope.getGonderiCount = function(callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     });   
 
 }
@@ -1778,7 +1780,7 @@ $scope.getGonderiList = function(token,username,callback){ // sadece listeyi get
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     });   
 
 
@@ -1831,7 +1833,7 @@ $scope.getFriendsList = function(usernameInput,callback){
        callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     });   
 
 }
@@ -1879,7 +1881,7 @@ $scope.downloadFriendProfilePhoto = function(index,username,callback){
       callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     });  
 }
 
@@ -1907,29 +1909,6 @@ $scope.getCommentNotifications = function(myToken,callback){
 
 }
 
-
-$scope.getCommentNotificationsCount = function(myToken,callback){
-    var obj = {
-      token : myToken
-    }
-    var data = myToken;
-    var url = $scope.appName+'getCommentNotificationsCount';
-    var config = {
-      transformRequest: angular.identity,
-      transformResponse: angular.identity,
-      headers : {
-          'Content-Type': 'application/json'
-      }
-    }
-
-   $http.post(url, data, config).then(function (response) {
-      callback(response);
-    }, function (response) {
-        $scope.error=JSON.parse(response.data);
-        console.log($scope.error.message);
-    });   
-
-}
 
 
 $scope.getFriendRequests = function(token,callback){
@@ -2044,7 +2023,7 @@ $scope.getFriendsCount = function(callback){
 
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     }); 
 
 }
@@ -2065,7 +2044,7 @@ $scope.getOwnerUserInfoForNotification = function(callback){
 
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     }); 
 
 }
@@ -2092,30 +2071,6 @@ $scope.getFriendRequests = function(token,callback){
         console.log($scope.error.message);
     });  
 }
-
-$scope.getFriendRequestsCount = function(myToken,callback){
-    var obj = {
-      token : myToken
-    }
-    var data = myToken;
-    var url = $scope.appName+'getFriendRequestsCount';
-    var config = {
-      transformRequest: angular.identity,
-      transformResponse: angular.identity,
-      headers : {
-          'Content-Type': 'application/json'
-      }
-    }
-
-   $http.post(url, data, config).then(function (response) {
-      callback(response);
-    }, function (response) {
-        $scope.error=JSON.parse(response.data);
-        console.log($scope.error.message);
-    });   
-
-}
-
 
 $scope.getCommentNotificationsCount = function(myToken,callback){
     var obj = {
@@ -2181,7 +2136,7 @@ $scope.commentBildirimHepsiOkundu = function(){
        }
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     });  
 }
 
@@ -2215,7 +2170,7 @@ $scope.comBildirimOkundu = function(index){
        }
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     });  
 }
 

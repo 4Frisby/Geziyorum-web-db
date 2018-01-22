@@ -168,11 +168,13 @@
                                                 </div>
                                                 <div align="center">
                                                     <h5 ng-class="{greyText: activeTab === 2}" style="
-                                                    color:red; 
-                                                    font-size: 10px;">    
+                                                    font-size: 13px;">    
                                                     GÖNDERİLER
                                                     </h5>
                                                 </div>
+                                                <div>
+                                                    <hr ng-class="{blackHr: activeTab === 1}">
+                                                </div>                                                
                                             </div>
                                             <div class="col-sm-6" ng-click="setActiveTab(2)">
                                                 <div>
@@ -180,11 +182,13 @@
                                                 </div>
                                                 <div align="center">
                                                     <h5 ng-class="{greyText: activeTab === 1}" style="
-                                                    color:blue; 
-                                                    font-size: 10px;">    
+                                                    font-size: 13px;">    
                                                     PAYLAŞILANLAR
                                                     </h5>
                                                 </div>
+                                                <div>
+                                                    <hr ng-class="{blackHr: activeTab === 2}">
+                                                </div>                                                
                                             </div>
                                        
                                         <div ng-show="showProfileTabOne" align="center">
@@ -602,7 +606,9 @@
                                         <div class="col-xs-3 col-sm-3 col-md-3" align="right" ng-show="isMobileFlag">
                                             <div class="form-group">
                                                 <a href="">
-                                                    <h5 style="font-size: 15px" ng-click="showGonderiDuzenleChecks()">Düzenle</h5>
+                                                    <h5 style="font-size: 13px" ng-click="showGonderiDuzenleChecks()">İndirilecekleri 
+                                                        <br>
+                                                    Belirle</h5>
                                                 </a>                                               
                                             </div>
                                         </div>                                                           
@@ -610,7 +616,7 @@
                                             <div class="form-group">
                                                 <a href="">
                                                     <h5 ng-click="tripDownload(tripDetay.tripId)"  
-                                                    style="font-size: 15px">İndir</h5>
+                                                    style="font-size: 13px">İndir</h5>
                                                 </a>                                               
                                             </div>
                                         </div>                                         

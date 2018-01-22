@@ -70,8 +70,6 @@ public class TripOtherUpdatesService implements GeneralProcess{
 
 	@Override
 	public Object processService() throws IOException {
-		if(!tripDao.checkTripUpdatedByOwner(tripId))
-			return false; // henüz yaratıcı gezisini yollamamışsa katılımcıya false döner.
 		
 		String tripFolderPath = Constraints.FULLPATH + File.separator + 
 				Constraints.TRIPFOLDER; //  -- db/trip		

@@ -222,20 +222,26 @@
                                                     <hr ng-class="{blackHr: activeTab === 1}">
                                                 </div>
                                                 <div align="center">
-                                                    <h5 ng-class="{greyText: activeTab === 2}" style="color:red; font-size: 10px;">
+                                                    <h5 ng-class="{greyText: activeTab === 2}" style="font-size: 13px;">
                                                     GÖNDERİLER
                                                     </h5>
                                                 </div>
+                                                <div>
+                                                    <hr ng-class="{blackHr: activeTab === 1}">
+                                                </div>                                                
                                             </div>
                                             <div class="col-sm-6" ng-click="setActiveTab(2)">
                                                 <div>
                                                     <hr ng-class="{blackHr: activeTab === 2}">
                                                 </div>
                                                 <div align="center">
-                                                    <h5 ng-class="{greyText: activeTab === 1}" style="color:blue; font-size: 10px;">    
+                                                    <h5 ng-class="{greyText: activeTab === 1}" style="font-size: 13px;">    
                                                     PAYLAŞILANLAR
                                                     </h5>
                                                 </div>
+                                                <div>
+                                                    <hr ng-class="{blackHr: activeTab === 2}">
+                                                </div>                                                
                                             </div>
                                         </div>  
                                         <div ng-show="showProfileTabOne" align="center">
@@ -725,7 +731,7 @@
                             <button type="button" class="close" style="margin: 3px;" data-dismiss="modal">&times;</button>                          
                             <div class="modal-header" align="center" ng-show="!showGonderiSikayetPaneFlag">
                                 <form role="form" autocomplete="off">
-                                    <div class="col-xs-10 col-sm-10 col-md-10" align="center">
+                                    <div class="col-xs-9 col-sm-9 col-md-9" align="center">
                                         <h5 style="font-size: 12px;">{{tripDetay.explanation}}</h5> 
                                         <a href="">
                                             <h5 style="font-size: 12px;">
@@ -739,15 +745,16 @@
                                             </h5>                                            
                                         </a>                                                   
                                     </div>
-                                    <div class="col-xs-2" align="right" ng-show="tripOlusturucInfo.username == headerUsername">
-                                        <h5 style="font-size: 15px;">
+                                    <div class="col-xs-3" align="left" ng-hide="!gizleyebilirMiFlag || isPaylasimFlag">
                                             <button 
                                             data-dismiss="modal"
                                             ng-click="gonderiGizle()"
-                                            class="btn btn-danger">Sil</button>
-                                        </h5>
+                                            class="btn btn-danger">
+                                            <h5 style="font-size: 10px;">
+                                            Gönderiyi <br> Sil
+                                            </h5>
+                                            </button>    
                                     </div>                                    
-                                    
                                     <!--<div class="col-sm-2 col-md-2" align="center">
                                         <a href="" ng-click="showGonderiSikayet()">
                                             <img src="/images/sikayet.png" class="img img-responsive">
@@ -902,7 +909,10 @@
                                                             </div>
                                                             <div class="col-sm-2" ng-show="showGonderiDuzenleCheck">
                                                                 <input type="checkbox" style="width: 30px; height: 30px;" ng-click="chooseDownloadMedia(picture.id,picture.indirCheck)" ng-model="picture.indirCheck" name="">
-                                                            </div>                                                            
+                                                            </div>
+                                                            <div class="col-sm-2" ng-show="medyaSilCheck && picture.creatorUsername == headerUsername">
+                                                                <input type="checkbox" style="width: 30px; height: 30px;" ng-click="chooseDeleteMedia(picture.id,picture.silCheck)" ng-model="picture.silCheck" name="">
+                                                            </div>
                                                         </div>  
                                                         <div class="col-sm-12" ng-repeat="video in tripVideos" 
                                                         align="center" 
@@ -927,7 +937,10 @@
                                                             </div>
                                                             <div class="col-sm-2" ng-show="showGonderiDuzenleCheck">
                                                                 <input type="checkbox" style="width: 30px; height: 30px;" ng-click="chooseDownloadMedia(video.id,video.indirCheck)" ng-model="video.indirCheck" name="">
-                                                            </div>                                                            
+                                                            </div>
+                                                            <div class="col-sm-2" ng-show="medyaSilCheck && video.creatorUsername == headerUsername">
+                                                                <input type="checkbox" style="width: 30px; height: 30px;" ng-click="chooseDeleteMedia(video.id,video.silCheck)" ng-model="video.silCheck" name="">
+                                                            </div>                                                                                                                        
                                                         </div>
 
                                                         <!-- audio -->
@@ -955,13 +968,33 @@
                                                             <div class="col-sm-2" ng-show="showGonderiDuzenleCheck">
                                                                 <input type="checkbox" style="width: 30px; height: 30px;" ng-click="chooseDownloadMedia(audio.id,audio.indirCheck)" ng-model="audio.indirCheck" name="">
                                                             </div>
+                                                            <div class="col-sm-2" ng-show="medyaSilCheck && audio.creatorUsername == headerUsername">
+                                                                <input type="checkbox" style="width: 30px; height: 30px;" ng-click="chooseDeleteMedia(audio.id,audio.silCheck)" ng-model="audio.silCheck" name="">
+                                                            </div>                                                            
                                                         </div>
-
                                                     </div>
                                                     </div>
                                                 </div>                                                 
                                             </div>                                            
                                         </div>   
+
+                                       <div 
+                                       ng-show="!isPaylasimFlag"
+                                       class="col-xs-5" style="margin : 5px;" align="center">
+                                            <a href="" ng-click="showMedyaSilChecks()">
+                                                <h5 style="font-size: 15px;">Silinecek Medyaları Seç</h5>
+                                            </a>
+                                        </div>
+                                        <div
+                                         ng-show="!isPaylasimFlag"
+                                         class="col-xs-5" style="margin : 5px;" align="center">
+                                            <button 
+                                            ng-click="deleteMediaFromTrip(tripDetay.tripId)"
+                                            class="btn btn-primary"
+                                            data-dismiss="modal"
+                                            >Seçili Medyaları Sil</button>
+                                        </div>            
+
                                         <div class="col-xs-12 col-sm-12 col-md-12">
                                            
                                             <div class="form-group">
@@ -1034,26 +1067,30 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xs-2 col-sm-2 col-md-2" ng-show="!isMobileFlag" align="center">
+                                        
+                                        <div class="col-xs-4 col-sm-4 col-md-4" ng-hide="isMobileFlag || isPaylasimFlag" align="left">
                                             <div class="form-group">
                                                 <a href="#"
                                                 data-dismiss="modal">
-                                                    <h5 style="font-size: 13px" 
+                                                    <h5 style="font-size: 15px" 
                                                     data-toggle="modal" 
                                                     data-target="#medyaEkleModal"
-                                                    >Ekle</h5>
+                                                    >Medya Ekle</h5>
                                                 </a>                                               
                                             </div>
                                         </div>  
-                                        <div class="col-xs-2 col-sm-2 col-md-2" ng-show="isMobileFlag" align="left">
+                                        
+                                        <div class="col-xs-3 col-sm-3 col-md-3" ng-show="isMobileFlag" align="left">
                                             <div class="form-group">
                                                 <a href="#">
-                                                    <h5 style="font-size: 13px" ng-click="showGonderiDuzenleChecks()">Düzenle</h5>
+                                                    <h5 style="font-size: 13px" ng-click="showGonderiDuzenleChecks()">İndirilecekleri 
+                                                        <br>
+                                                    Belirle</h5>
                                                 </a>                                               
                                             </div>
                                         </div>                                                                
-                                        <div class="col-xs-2 col-sm-2 col-md-2" align="center" ng-show="isMobileFlag">
-                                            <div class="form-group">
+                                        <div class="col-xs-3 col-sm-3 col-md-3" align="center" ng-show="isMobileFlag">
+                                            <div class="form-group" align="right">
                                                 <a href="">
                                                     <h5 style="font-size: 13px"
                                                     ng-click="tripDownload(tripDetay.tripId)">İndir</h5>

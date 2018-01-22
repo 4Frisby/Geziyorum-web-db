@@ -337,6 +337,8 @@ public class CommonDaoImpl implements CommonDao {
 				sql += " and privacy_type = 4";
 			}			
 		}
+		
+		sql += " order by id desc";
 
 		
 		List<Map<String, Object>> rows = this.jdbcTemplate.queryForList(sql, new Object[] {tId,userId});
@@ -861,6 +863,13 @@ public class CommonDaoImpl implements CommonDao {
 			ownerUserList.add(user);
 		}
 		return ownerUserList;
+	}
+
+	@Override
+	public Boolean deleteMediaByFilename(String mediaName) {
+		final String sql = "DELETE FROM trip_media where file_name = ? ";
+		jdbcTemplate.update(sql, mediaName);
+		return true;
 	}
 
 }

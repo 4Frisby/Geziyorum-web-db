@@ -277,9 +277,9 @@ public class CommonFuncs{
 		if(type.equals("ride"))
 			return "Bisiklet";
 		if(type.equals("car"))
-			return "Araç";
+			return "Araba";
 		
-		return "Araç";
+		return "Araba";
 		//return typeResolverDao.getDescription(type);
 	}
 	

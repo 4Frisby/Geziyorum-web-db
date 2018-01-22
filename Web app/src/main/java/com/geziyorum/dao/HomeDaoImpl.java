@@ -37,7 +37,8 @@ public class HomeDaoImpl implements HomeDao{
 				" (select personal_sharing_id \n" + 
 				" from someone_sharing\n" + 
 				" where shared_user_id \n" + 
-				" in( select user_two from friend where user_one = ?) \n" + 
+				" in( select user_two from friend where user_one = ?)"+
+				" and ss.shared_user_id in ( select user_two from friend where user_one = ?)  \n" + 
 				" )\n" + 
 				"union\n" + 
 				"select ps.id as gonderi_id,t.id as trip_id,t.explanation,t.location,t.start_time,t.end_time,u.username as olusturan_username, u.id olusturan_user_id,u.username as paylasan_username,t.folder_name, ps.shared_time from personal_sharing ps, trip t, users u where ps.trip_id= t.id\n" + 
@@ -50,6 +51,7 @@ public class HomeDaoImpl implements HomeDao{
 				" order by shared_time desc";
 		List<Map<String, Object>> rows = this.jdbcTemplate.queryForList(sql,new Object[] 
 				{
+						userId,
 						userId,
 						userId
 				});

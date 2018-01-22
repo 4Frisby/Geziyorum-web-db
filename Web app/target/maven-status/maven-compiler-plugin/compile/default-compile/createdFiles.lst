@@ -12,6 +12,7 @@ com/geziyorum/entity/Adress.class
 com/geziyorum/argumentresolver/TripToken.class
 com/geziyorum/controller/login/UpdatePasswordController.class
 com/geziyorum/argumentresolver/SikayetInfo.class
+com/geziyorum/controller/trip/CheckOwnerSent.class
 com/geziyorum/entity/WhereHappened.class
 com/geziyorum/argumentresolver/TokenTripRequest.class
 com/geziyorum/controller/search/AramaKaydiGenelController.class
@@ -100,6 +101,7 @@ com/geziyorum/mapper/UserRowMapper.class
 com/geziyorum/service/DenyTripRequestService.class
 com/geziyorum/argumentresolver/TokenYorumSikayet.class
 com/geziyorum/controller/admin/GetAllTripMedia.class
+com/geziyorum/service/TripDeleteMediaService.class
 com/geziyorum/mapper/AdminRowMapper.class
 com/geziyorum/argumentresolver/PersonalSharingTripSharedUser.class
 com/geziyorum/argumentresolver/TokenPasswordResolver.class
@@ -147,6 +149,7 @@ com/geziyorum/controller/profile/UserInfo.class
 com/geziyorum/mapper/CityRowMapper.class
 com/geziyorum/controller/home/GetFriendPaylasimList.class
 com/geziyorum/dao/RegisterPageDao.class
+com/geziyorum/controller/trip/TripDeleteMedia.class
 com/geziyorum/service/CreateGonderiSikayetService.class
 com/geziyorum/service/GetFriendPaylasimListService.class
 com/geziyorum/argumentresolver/TripSearchElements.class

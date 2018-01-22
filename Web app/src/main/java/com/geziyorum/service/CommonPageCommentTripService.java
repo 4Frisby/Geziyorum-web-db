@@ -71,7 +71,9 @@ public class CommonPageCommentTripService implements GeneralProcess{
 		if(commonDao.checkCommentSpam(getComment()))
 			throw new IOException("Spam mesaj algılandı.");		
 
-
+    	if(getComment().getContent() == null || getComment().getContent().isEmpty()
+    			|| getComment().getContent().equals("") || getComment().getContent().equals(" "))
+    		throw new IOException("Boş yorum yapamazsınız.");
 		
 		return true;
 	}

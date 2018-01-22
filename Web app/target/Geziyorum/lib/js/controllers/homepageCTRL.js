@@ -413,6 +413,7 @@ $scope.commentOnPersonalSharing = function(gonderiIndex,yorumIcerik){
     }
 
    $http.post(url, data, config).then(function (response) {
+     yorumIcerik = "";
      $scope.getPersonalSharingComments($scope.sessionCookie,$scope.friendGonderiList[gonderiIndex].gonderiId,gonderiIndex,function(gonderiIndex,response){
          var comments = JSON.parse(response.data);
          for(i=0; i<comments.length; i++ ){
@@ -426,6 +427,7 @@ $scope.commentOnPersonalSharing = function(gonderiIndex,yorumIcerik){
         className: 'info'
       });
     }, function (response) {
+        yorumIcerik = "";
         $scope.error=JSON.parse(response.data);
         ngToast.create({
           content: $scope.error.message,
@@ -455,6 +457,7 @@ $scope.commentOnPersonalSharingDetay = function(yorumIcerik){
     }
 
    $http.post(url, data, config).then(function (response) {
+     $scope.yorumIcerikDetay = "";
      $scope.getPersonalSharingComments($scope.sessionCookie,$scope.seciliGonderi.gonderiId,0,function(gonderiIndex,response){
          var comments = JSON.parse(response.data);
          for(i=0; i<comments.length; i++ ){
@@ -468,6 +471,7 @@ $scope.commentOnPersonalSharingDetay = function(yorumIcerik){
         className: 'info'
       });   
     }, function (response) {
+        $scope.yorumIcerikDetay = "";
         $scope.error=JSON.parse(response.data);
         ngToast.create({
           content: $scope.error.message,

@@ -711,7 +711,7 @@ $scope.getRootDB = function(callback){
 
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     }); 
 
 }
@@ -814,10 +814,116 @@ $scope.cikisYap = function(){
     location.href="/Geziyorum";
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     }); 
 
 }
+
+
+$scope.excelDokumuIndir = function(type,content){
+    var satirlar = []
+    if(type == 1){
+        var sutunlar = ["Şikayetçi", "Şikayet Edilen", "Yorum İçeriği", "Şikayet Nedeni", "Şikayet Metini", "Şikayet Zamanı", "Değerlendirme"];
+      satirlar.push(sutunlar);
+      for(i=0; i<content.length; i++){
+        var satir = [content[i].sikayetciUsername, content[i].sikayetEdilenUsername,content[i].yorumIcerik,
+        content[i].sikayetNedeni, content[i].sikayetMetini, content[i].sikayetZamani,content[i].degerlendirildi];
+        satirlar.push(satir);
+      }      
+    }
+
+    if(type == 2)
+      satirlar.push($scope.globalProfilSikayetFilter);
+
+    if(type == 3)
+      satirlar.push($scope.globalGonderiSikayetFilter);
+
+
+
+    $scope.excelOlustur(satirlar);
+
+}
+
+
+
+    $scope.excelOlustur = function (excelSatirlari) {
+
+        if(typeof JSZip !== 'undefined') jszip = JSZip;
+        $scope.workSheetName = $scope.excelSheetName;
+        var sheetName = "dokuman sheet";
+        ranges = [];
+        var workbook = new Workbook();
+        var workSheet = sheetFromData(excelSatirlari);
+        workbook.SheetNames.push(sheetName);
+        workbook.Sheets[sheetName] = workSheet;
+        workSheet['!merges'] = ranges;
+        var filename = 'Rapor.xlsx';
+        var excelFile = XLSX.write(workbook, { bookType: 'xlsx', bookSST: false, type: 'binary' });
+        downloadFile(excelFile, filename, 'application/octet-stream');
+    }
+
+
+
+    function downloadFile(data, filename, type) {
+        //console.log("downloadFile...");
+        var a = document.createElement("a");
+        var file = new Blob([binaryStringToArrayBuffer(data)], { type: type });
+        if (window.navigator.msSaveOrOpenBlob) // IE10+
+            window.navigator.msSaveOrOpenBlob(file, filename);
+        else { // Others
+            var url = URL.createObjectURL(file);
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function () {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }, 0);
+        }
+    }
+
+    function sheetFromData(data, opts) {
+        //console.log("sheetFromData...");
+        var ws = {};
+        var range = { s: { c: 10000000, r: 10000000 }, e: { c: 0, r: 0 } };
+        for (var R = 0; R != data.length; ++R) {
+            for (var C = 0; C != data[R].length; ++C) {
+                if (range.s.r > R) range.s.r = R;
+                if (range.s.c > C) range.s.c = C;
+                if (range.e.r < R) range.e.r = R;
+                if (range.e.c < C) range.e.c = C;
+
+                var cell = null;
+                if (R == 0) {
+                    cell = { t: 's', v: data[R][C], s: { font: { sz: 14, bold: true } } };
+                } else {
+                    cell = { v: data[R][C] };
+                }
+
+                if (cell.v == null) continue;
+
+                var cell_ref = XLSX.utils.encode_cell({ c: C, r: R });
+
+                if (typeof cell.v === 'number') cell.t = 'n';
+                else if (typeof cell.v === 'boolean') cell.t = 'b';
+                else if (cell.v instanceof Date) {
+                    cell.t = 'n';
+                    cell.z = XLSX.SSF._table[14];
+                    cell.v = datenum(cell.v);
+                }
+                else cell.t = 's';
+
+                ws[cell_ref] = cell;
+            }
+        }
+        if (range.s.c < 10000000) ws['!ref'] = XLSX.utils.encode_range(range);
+        return ws;
+    }    
+
+
+
+
 
 function deleteAllCookies() {
     var cookies = document.cookie.split(";");
@@ -869,7 +975,7 @@ $scope.getTripByPSID = function(psId,callback){
           callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     }); 
 
 }
@@ -889,7 +995,7 @@ $scope.getPsByPSID = function(psId,callback){
           callback(response);
         }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     }); 
 
 }
@@ -909,7 +1015,7 @@ $scope.getFakeSession = function(psId,callback){
           callback(response);
         }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     }); 
 
 }
@@ -934,7 +1040,7 @@ $scope.getTripMedia = function(token,tripId,callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     });   
 
 }
@@ -972,7 +1078,7 @@ $scope.getPersonalSharingComments = function(token,psID,callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     });   
 
 }
@@ -997,7 +1103,7 @@ $scope.getTripDetay = function(token,tripId,callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     });   
 
 }
@@ -1021,7 +1127,7 @@ $scope.getOlusturucuInfo = function(token,tripId,callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     });   
 
 }
@@ -1045,7 +1151,7 @@ $scope.checkGrupGezisi = function(token,tripId,callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     }); 
 }
 
@@ -1069,7 +1175,7 @@ $scope.getKatilimcilarInfo = function(token,tripId,callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     }); 
 
 }
@@ -1094,7 +1200,7 @@ $scope.getTripPath = function(token,tripId,callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     });  
 }
 
@@ -1118,7 +1224,7 @@ $scope.getPersonalSharingDetay = function(token,psID,callback){
     callback(response);
     }, function (response) {
         $scope.error=JSON.parse(response.data);
-        bootbox.alert($scope.error.message);
+        console.log($scope.error.message);
     });   
 
 }

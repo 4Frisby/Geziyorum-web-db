@@ -22,6 +22,7 @@ public class CommentTripController {
     @RequestMapping(method = RequestMethod.POST, value="/commentTrip")
     public Object createComment(@RequestBody CommentPersonalSharingResolver commentTripResolver) throws IOException{
     	commonPageCommentTripService.setCommentPersonalSharingResolver(commentTripResolver);
+
     	return commonPageCommentTripService.startService();
     	
     }
